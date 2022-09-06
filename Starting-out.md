@@ -58,7 +58,7 @@ Vendors create free software that pairs with their hardware. For example, a Falc
 * REV Robotics    
     ```https://software-metadata.revrobotics.com/REVLib.json```    
 
-Usually, you'll want to use all three of these vendors. Sometimes, one of our parts may use a different vendor. Make sure to look for a library or otherwise before trying to program with that item.
+Usually, you'll want to use all three of these vendors. Sometimes, one of our parts may use a different vendor. Make sure to look for a library or similar before trying to program with that item.
     
 ##### Adding a vendor to WPILib
 Follow these steps to add a vendor to WPILib:
@@ -70,4 +70,4 @@ Follow these steps to add a vendor to WPILib:
 
 Our repo usually has these automatically installed, but for personal projects this is required.
 ___
-####
+#### 
