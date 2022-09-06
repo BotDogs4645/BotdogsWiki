@@ -41,7 +41,8 @@ ___
 A quick review: To start, the ```Main``` class is activated by the natural Java starter method (main). You usually write in this method when learning in AP CS A. Then, the ```Main``` class activates the ```Robot``` class. The ```Robot``` class begins to loop through methods that fit the state of the robot. Also in the RobotInit method (the first method that's called), it initializes the ```RobotContainer``` class. The ```RobotContainer``` only runs once, starting with the constructor and then going through the methods. You can track where it goes and when by following the constructor and seeing which method is called within it.   
 ___
 #### Deploying & Building
-Building a program is the process of interpreting and compiling the code. The code is checked and then approved by the interpreter. This catches all syntax errors but no logic errors. You can build a program at home by using the *CTRL+SHIFT+P* window and then typing Build and choosing the "WPILib:" option specifically. 
+*Building* a program is the process of interpreting and compiling the code. The code is checked and then approved by the interpreter. This catches all syntax errors but no logic errors. You can build a program at home by using the *CTRL+SHIFT+P* window and then typing Build and choosing the "WPILib:" option specifically.    
+*Deploying* a program literally means deploying the code to the Robot. This is the only way to detect logic errors other than the simulator. Deploying builds the program first, so any syntax errors not highlighted will be detected. Refer to the RoboRIO section for information about debug messages.
 ___
 #### DriverStation (DS) 
 DriverStation is a utility that allows us to upload code, control states of the robot and receive analytics.    
@@ -49,6 +50,7 @@ To open DS, go to your Start Menu and then type in Driver Station.
 To review the DS sections and specific overview, please visit this guide's DS section.
 ___
 #### roboRIO basics
+The roboRIO is this grey box on the robot. It contains our code that runs on the robot. It has a bunch of I/O such as an I2C port, PWM and analog. It is recommended that the roboRIO is handled by electronics, but programming should also be informed about it. CORE team members might be asked to flash the roboRIO or radios.
 ___
 #### Vendors
 Vendors create free software that pairs with their hardware. For example, a Falcon 500 motor--which we use constantly in FRC--has code already written for it. We NEVER want to remake code that is already written. For that reason, we use vendor libraries that give us already created code for their product. Some specific vendor libraries that you might wanna use:
