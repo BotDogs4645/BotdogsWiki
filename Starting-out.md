@@ -40,3 +40,18 @@ ___
     It can be confusing at first. This section is just to help you understand everything, but if you need help just ask either Dave, Aidan or Conor. Here's a quick review: First, the ```Main``` class is activated by the natural Java starter method (main). You usually write in this method when learning in AP CS A. Then, the ```Main``` class activates the ```Robot``` class. The ```Robot``` class begins to loop through methods that fit the state of the robot. Also in the RobotInit method (the first method that's called), it initializes the ```RobotContainer``` class. The ```RobotContainer``` only runs once, starting with the constructor and then going through the methods. You can track where it goes and when by following the constructor and seeing which method is called within it.   
 ___
 #### DriverStation (DS) 
+DriverStation is a utility that allows us to upload code, control states of the robot and receive analytics.    
+To open DS, go to your Start Menu and then type in Driver Station.    
+To review the DS sections and specific overview, please visit this guide's DS section.
+___
+#### roboRIO basics
+___
+#### Vendors
+Vendors create free software that pairs with their hardware. For example, a Falcon 500 motor--which we use constantly in FRC--has code already written for it. We NEVER want to remake code that is already written. For that reason, we use vendor libraries that give us already created code for their product. Some specific vendor libraries that you might wanna use:
+* CTRE (Cross the Road Electronics)   
+    ```https://maven.ctr-electronics.com/release/com/ctre/phoenix/Phoenix-frc2022-latest.json```
+* Kauai Labs    
+    ```https://www.kauailabs.com/dist/frc/2022/navx_frc.json```
+* REV Robotics    
+    ```https://software-metadata.revrobotics.com/REVLib.json```
+Usually, you'll want to use all three of these vendors. Sometimes, one of our parts may use a different vendor. Make sure to look for a library or otherwise before trying to program with that item.
