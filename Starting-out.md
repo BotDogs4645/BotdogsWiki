@@ -39,6 +39,9 @@ ___
 * **Note**    
     It can be confusing at first. This section is just to help you understand everything, but if you need help just ask either Dave, Aidan or Conor. Here's a quick review: First, the ```Main``` class is activated by the natural Java starter method (main). You usually write in this method when learning in AP CS A. Then, the ```Main``` class activates the ```Robot``` class. The ```Robot``` class begins to loop through methods that fit the state of the robot. Also in the RobotInit method (the first method that's called), it initializes the ```RobotContainer``` class. The ```RobotContainer``` only runs once, starting with the constructor and then going through the methods. You can track where it goes and when by following the constructor and seeing which method is called within it.   
 ___
+#### Deploying & Building
+Building a program is the process of interpreting and compiling the code. The code is checked and then approved by the interpreter. This catches all syntax errors but no logic errors. You can build a program at home by using the *CTRL+SHIFT+P* window and then typing Build and choosing the "WPILib:" option specifically. 
+___
 #### DriverStation (DS) 
 DriverStation is a utility that allows us to upload code, control states of the robot and receive analytics.    
 To open DS, go to your Start Menu and then type in Driver Station.    
@@ -53,5 +56,18 @@ Vendors create free software that pairs with their hardware. For example, a Falc
 * Kauai Labs    
     ```https://www.kauailabs.com/dist/frc/2022/navx_frc.json```
 * REV Robotics    
-    ```https://software-metadata.revrobotics.com/REVLib.json```
+    ```https://software-metadata.revrobotics.com/REVLib.json```    
+
 Usually, you'll want to use all three of these vendors. Sometimes, one of our parts may use a different vendor. Make sure to look for a library or otherwise before trying to program with that item.
+    
+##### Adding a vendor to WPILib
+Follow these steps to add a vendor to WPILib:
+1. Get vendor online install link (like the ones in the previous section).
+2. Use *CTRL+SHIFT+P* to access the WPILib Start Menu.
+3. Type "Add Vendor (Online)".
+4. Paste Link.
+5. Rebuild the program.    
+
+Our repo usually has these automatically installed, but for personal projects this is required.
+___
+####
