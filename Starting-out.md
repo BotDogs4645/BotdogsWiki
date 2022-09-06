@@ -29,7 +29,7 @@ ___
 * **Main**    
     This is where the Robot starts. We usually don't touch it at all.
 * **Robot**    
-     Some very basic, crucial pieces of the robot are stored here. Like an Arduino or Argon, there is a forever while loop that constantly runs on the robot's hardware. This while loop calls on these functions in Robot constantly, every 30 ms or so. They all have self explanatory names such as ```RobotInit``` (runs only once, at the initialization of the robot) or ```RobotPeriodic``` (runs always, at the 30 ms time frame). A very minor fraction of our code will be written here, so it's probably best not to mess with it unless you know what you're doing.
+     Some very basic, crucial pieces of the robot are stored here. Like an Arduino or Argon, there is a forever while loop that constantly runs on the robot's hardware. This while loop calls on these functions in Robot constantly, every 20 ms or so. They all have self explanatory names such as ```RobotInit``` (runs only once, at the initialization of the robot) or ```RobotPeriodic``` (runs always, at the 20 ms time frame). A very minor fraction of our code will be written here, so it's probably best not to mess with it unless you know what you're doing.
 * **RobotContainer**    
     The file that holds most of our declarations of objects and subsystems. It "contains" most of the robot's counterparts to hardware. A lot of code of yours will be used here, but no logic. This is mainly for declaration and setting up the rest of the robot's software. Method names inside are pretty self explanatory.     
 * **Subsystems**    
@@ -39,3 +39,4 @@ ___
 * **Note**    
     It can be confusing at first. This section is just to help you understand everything, but if you need help just ask either Dave, Aidan or Conor. Here's a quick review: First, the ```Main``` class is activated by the natural Java starter method (main). You usually write in this method when learning in AP CS A. Then, the ```Main``` class activates the ```Robot``` class. The ```Robot``` class begins to loop through methods that fit the state of the robot. Also in the RobotInit method (the first method that's called), it initializes the ```RobotContainer``` class. The ```RobotContainer``` only runs once, starting with the constructor and then going through the methods. You can track where it goes and when by following the constructor and seeing which method is called within it.   
 ___
+#### DriverStation (DS) 
