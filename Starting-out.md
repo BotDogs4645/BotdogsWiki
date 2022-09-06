@@ -1,4 +1,3 @@
-## **Starting out** 
 To start, go and read the official [WPILib Wiki](https://docs.wpilib.org/en/stable/docs/software/what-is-wpilib.html) intro page that overviews general stuff about the program.   
 WPILib is a collection of extensions in VS Code that allow us the best way to write code for the robot.  
 ___
