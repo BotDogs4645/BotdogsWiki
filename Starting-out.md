@@ -25,7 +25,7 @@ ___
 ___
 #### Parts of a command robot
 * **Constants**    
-    The constants file is full of values and objects that do not change. Values like wheel sizes or max velocities of parts should be stored here. All of the values should start with the “Constant” modifier or ```public final static``` which allows us to access it anywhere and make sure it doesn't change.
+    The constants file is full of values and objects that do not change. Values like wheel sizes or max velocities of parts should be stored here. All of the values should start with the “Constant” modifier (```public final static```) which allows us to access it anywhere and make sure it doesn't change.
 * **Main**    
     This is where the Robot starts. We usually don't touch it at all.
 * **Robot**    
