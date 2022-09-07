@@ -49,7 +49,7 @@ Driver Station is a utility that allows us to upload code, control states of the
 To open DS, go to your Start Menu and then type in Driver Station.    
 To review the DS sections and specific overview, please visit this guide's DS section.
 ___
-#### roboRIO basics
+#### roboRIO
 The roboRIO is this grey box on the robot. It contains our code that runs on the robot. It has a bunch of I/O such as an I2C port, PWM and analog. It is recommended that the roboRIO is handled by electronics, but programming should also be informed about it. CORE team members might be asked to flash the roboRIO or radios.    
 
 ##### roboRIO lights
