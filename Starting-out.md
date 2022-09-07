@@ -43,7 +43,7 @@ A quick review: To start, the ```Main``` class is activated by the natural Java 
 ___
 #### Deploying & Building
 *Building* a program is the process of interpreting and compiling the code. The code is checked and then approved by the interpreter. This catches all syntax errors but no logic errors. You can build a program at home by using the *CTRL+SHIFT+P* window and then typing Build and choosing the "WPILib:" option specifically.    
-*Deploying* a program literally means deploying the code to the Robot. This is the only way to detect logic errors other than the simulator. Deploying builds the program first, so any syntax errors not highlighted will be detected. You can deploy a program by using the *CTRL+SHIFT+P* window and then typing Deploy while connected to the Robot. Refer to the RoboRIO section for information about debug messages.
+*Deploying* a program literally means deploying the code to the Robot. This is the only way to detect logic errors other than the simulator. Deploying builds the program first, so any syntax errors not highlighted will be detected. You can deploy a program by using the *CTRL+SHIFT+P* window and then typing "Deploy Robot Code" while connected to the Robot. Refer to the RoboRIO section for information about debug messages.
 ___
 #### DriverStation (DS) 
 DriverStation is a utility that allows us to upload code, control states of the robot and receive analytics.    
@@ -62,16 +62,16 @@ Vendors create free software that pairs with their hardware. For example, a Falc
 * REV Robotics    
     ```https://software-metadata.revrobotics.com/REVLib.json```    
 
-Usually, you'll want to use all three of these vendors. Sometimes, one of our parts may use a different vendor. Make sure to look for a library or similar before trying to program with that item.
+Usually, you'll want to use all three of these vendors. Sometimes one of our parts may use a different vendor; make sure to look for a library or similar before trying to program with that item.
     
 ##### Adding a vendor to WPILib
 Follow these steps to add a vendor to WPILib:
 1. Get vendor online install link (like the ones in the previous section).
 2. Use *CTRL+SHIFT+P* to access the WPILib Start Menu.
-3. Type "Add Vendor (Online)".
-4. Paste Link.
-5. Rebuild the program.    
+3. Type "Manage Vendor Libraries".
+4. Choose "Install new libraries (online)"
+5. Paste your online install link.
+6. Say yes to pop up or rebuild program.    
 
 Our repo usually has these automatically installed, but for personal projects this is required.
 ___
-#### 
