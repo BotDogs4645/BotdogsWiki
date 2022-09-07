@@ -1,10 +1,10 @@
 ## Table of Contents
-- [ ] [**Home**][home]   
-[**Getting started**][Gstart]  
-[**Coding Conventions**][CConv]    
-[**In-depth Code Breakdown**][bdown]     
-[**GitHub**][GConv]    
-[**Updating Devices**][dvcupd]
+- [x] [**Home**][home]   
+- [ ] [**Getting started**][Gstart]  
+- [ ] [**Coding Conventions**][CConv]    
+- [ ] [**In-depth Code Breakdown**][bdown]     
+- [ ] [**GitHub**][GConv]    
+- [ ] [**Updating Devices**][dvcupd]
 
 [home]: https://github.com/Aidan747/FRC-Offseason-2022/wiki
 [Gstart]: https://github.com/Aidan747/FRC-Offseason-2022/wiki/Starting-out
