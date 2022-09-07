@@ -1,6 +1,5 @@
-### Table of Contents
-___
-#### [Home][home]
+## Table of Contents
+### [Home][home]
 #### [Getting started][Gstart]
 #### [GitHub Conventions][GConv]
 
