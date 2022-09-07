@@ -58,8 +58,9 @@ public DriveTrain(MotorControllerGroup leftMotors, MotorControllerGroup rightMot
     ahrs.reset();
     // i removed most of the analyzation code from this segment because it is really long..
 }
-```
+```    
 
+Now with our convention:
 ```java
 public DriveTrain(WPI_TalonFX leftMotorOne, WPI_TalonFX leftMotorTwo, WPI_TalonFX rightMotorOne, WPI_TalonFX rightMotorTwo) {
     this.leftMotorOne = leftMotorOne;
@@ -70,12 +71,23 @@ public DriveTrain(WPI_TalonFX leftMotorOne, WPI_TalonFX leftMotorTwo, WPI_TalonF
     this.left = new MotorControllerGroup(this.leftMotorOne, this.leftMotorTwo);
     this.right = new MotorControllerGroup(this.rightMotorOne, this.rightMotorTwo);
     
-    drive = new DifferentialDrive(left, right);
+    this.drive = new DifferentialDrive(left, right);
     config();
     
     // if we are testing, enable testing mode.
     if (testing) {
       enableTesting();
     }    
+  } 
+
+  // a huge boost in readability. Now we can directly edit and add to configs instead of doing it in the constructor.
+  public void config() {
+    left.setInverted(false);
+    right.setInverted(true);
+  }
+  
+  public void enableTesting() {
+    // shuffleboard code
+  }
 }
 ```
