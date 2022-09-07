@@ -103,3 +103,4 @@ Follow these steps to add a vendor to WPILib:
 Our repo usually has these automatically installed, but for personal projects this is required.
 ___
 #### Shuffleboard
+Shuffleboard is the primary way to get I/O from the robot. We are able to put different tabs onto Shuffleboard which can correlate to different subsystems. We can also have a general tab for most things that we'd need to see during competition. Shuffleboard has some pretty easy and some pretty difficult setups, so refer to the Shuffleboard in Coding Conventions. 
