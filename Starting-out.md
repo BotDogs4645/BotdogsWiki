@@ -9,7 +9,7 @@ ___
 4. Complete download with your preferred options, but choose "Download for this Computer Only".
 5. To access, open the Start Menu and search for 2022 WPILib VS Code.   
 
-*NOTE:* WPILib installation on school computers should be done preferably by the programming or electronics leads.
+> *NOTE:* WPILib installation on school computers should be done preferably by the programming or electronics leads.
 ___
 #### Creating a Project
 1. Open 2022 WIPLib VS Code from either the Start Menu or the icon on your desktop screen.
