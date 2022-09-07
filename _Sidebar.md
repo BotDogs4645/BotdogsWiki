@@ -1,5 +1,5 @@
 ## Table of Contents
-[**Home**][home] [x]    
+- [ ] [**Home**][home]   
 [**Getting started**][Gstart]  
 [**Coding Conventions**][CConv]    
 [**In-depth Code Breakdown**][bdown]     
