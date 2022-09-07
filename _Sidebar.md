@@ -1,7 +1,7 @@
 ### Table of Contents
-##### [Home][home]
-##### [Getting started][Gstart]
-##### [GitHub Conventions][GConv]
+#### [Home][home]
+#### [Getting started][Gstart]
+#### [GitHub Conventions][GConv]
 
 
 [home]: https://github.com/Aidan747/FRC-Offseason-2022/wiki
