@@ -1,6 +1,6 @@
 ## Table of Contents
 - [x] [**Home**][home]   
-- [ ] [**Getting started**][Gstart]  
+- [x] [**Getting started**][Gstart]  
 - [ ] [**Coding Conventions**][CConv]    
 - [ ] [**In-depth Code Breakdown**][bdown]     
 - [ ] [**GitHub**][GConv]    
