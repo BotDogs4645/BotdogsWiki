@@ -43,7 +43,7 @@ A quick review: To start, the ```Main``` class is activated by the natural Java 
 ___
 #### Deploying & Building
 *Building* a program is the process of interpreting and compiling the code. The code is checked and then approved by the interpreter. This catches all syntax errors but no logic errors. You can build a program at home by using the *CTRL+SHIFT+P* window and then typing Build and choosing the "WPILib:" option specifically.    
-*Deploying* a program literally means deploying the code to the Robot. This is the only way to detect logic errors other than the simulator. Deploying builds the program first, so any syntax errors not highlighted will be detected. Refer to the RoboRIO section for information about debug messages.
+*Deploying* a program literally means deploying the code to the Robot. This is the only way to detect logic errors other than the simulator. Deploying builds the program first, so any syntax errors not highlighted will be detected. You can deploy a program by using the *CTRL+SHIFT+P* window and then typing Deploy while connected to the Robot. Refer to the RoboRIO section for information about debug messages.
 ___
 #### DriverStation (DS) 
 DriverStation is a utility that allows us to upload code, control states of the robot and receive analytics.    
