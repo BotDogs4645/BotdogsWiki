@@ -16,12 +16,13 @@ ___
 2. Use *CTRL+SHIFT+P*. This opens a start menu within VS Code that is extremely useful. We use it a lot.
 3. Type "Create a new Project" and select the WPILib option (has WPILib: next to it.)
 4. A new screen has popped up. For the options choose:
-     * Java
-     * example
-     * Command Based
+     * template
+     * java
+     * Command Robot
 5. Select a directory, can be any folder.
-6. Type in our team number, 4645. 
-7. Create project.
+6. Choose a project name (can be named anything)
+7. Type in our team number, 4645. 
+8. Create project.
 ___
 #### Parts of a command robot
 * **Constants**    
