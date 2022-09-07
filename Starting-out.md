@@ -41,17 +41,45 @@ ___
     It can be confusing at first. If you ever need help, do not be afraid to ask Dave, Aidan or Conor.    
 A quick review: To start, the ```Main``` class is activated by the natural Java starter method (main). You usually write in this method when learning in AP CS A. Then, the ```Main``` class activates the ```Robot``` class. The ```Robot``` class begins to loop through methods that fit the state of the robot. Also in the RobotInit method (the first method that's called), it initializes the ```RobotContainer``` class. The ```RobotContainer``` only runs once, starting with the constructor and then going through the methods. You can track where it goes and when by following the constructor and seeing which method is called within it.   
 ___
-#### Deploying & Building
+#### Building & Deploying 
 *Building* a program is the process of interpreting and compiling the code. The code is checked and then approved by the interpreter. This catches all syntax errors but no logic errors. You can build a program at home by using the *CTRL+SHIFT+P* window and then typing Build and choosing the "WPILib:" option specifically.    
 *Deploying* a program literally means deploying the code to the Robot. This is the only way to detect logic errors other than the simulator. Deploying builds the program first, so any syntax errors not highlighted will be detected. You can deploy a program by using the *CTRL+SHIFT+P* window and then typing "Deploy Robot Code" while connected to the Robot. Refer to the RoboRIO section for information about debug messages.
 ___
-#### DriverStation (DS) 
-DriverStation is a utility that allows us to upload code, control states of the robot and receive analytics.    
+#### Driver Station (DS) 
+Driver Station is a utility that allows us to upload code, control states of the robot and receive analytics.    
 To open DS, go to your Start Menu and then type in Driver Station.    
 To review the DS sections and specific overview, please visit this guide's DS section.
 ___
 #### roboRIO basics
-The roboRIO is this grey box on the robot. It contains our code that runs on the robot. It has a bunch of I/O such as an I2C port, PWM and analog. It is recommended that the roboRIO is handled by electronics, but programming should also be informed about it. CORE team members might be asked to flash the roboRIO or radios.
+The roboRIO is this grey box on the robot. It contains our code that runs on the robot. It has a bunch of I/O such as an I2C port, PWM and analog. It is recommended that the roboRIO is handled by electronics, but programming should also be informed about it. CORE team members might be asked to flash the roboRIO or radios.    
+
+##### roboRIO lights
+Programming is all about giving instructions and receiving a response. A very basic form of that is in the form of the lights on the roboRIO.    
+We look at DS for specific errors; however, if something much more fundamental goes wrong, consult the roboRIO lights.    
+    
+Here are some to look out for:    
+* Assume ${\color{green}\text{green}}$ is good.
+* **Power**: 
+    * ${\color{orange}\text{Amber}}$: Brownout    
+    Restart the robot and replace the battery. If problem persists, consider high power consumption parts on the robot. If it continues, consult a lead.
+    * ${\color{red}\text{Red}}$: Power fault    
+    Disconnect circuit breaker on robot and consult a lead.
+* **Status**:
+    The status light is special. It activates only while booting. If it stays on for too long (greater than a minute) or is blinking AT ALL:
+    1. Leave it ON.
+    2. Tell a coach or lead immediately.
+* **Comm**:
+    * ${\color{grey}\text{Grey}}$: No Communications    
+    There is a lot that could be wrong. Check cables, connections and firmware on both the RIO and laptop.
+    * ${\color{red}\text{Red Solid}}$: No Code    
+    Deploy code (instructions in Building & Deploying)
+    * ${\color{red}\text{Red Blinking}}$: E-stop triggered    
+    Emergency stop or E-stop triggers when the robot decides that conditions or instructions are too dangerous. Using too much of the battery can cause this. Most times, someone might've pressed space on the laptop while in DS, which automatically triggers the E-Stop mode. Redeploy to get rid of it.
+* **Mode**:
+    * Each color depicts what mode the robots in, but there is not necessarily a bad mode light.
+    * ${\color{orange}\text{Orange}}$: auto
+    * ${\color{green}\text{Green}}$: teleop
+    * ${\color{red}\text{Red}}$: test
 ___
 #### Vendors
 Vendors create free software that pairs with their hardware. For example, a Falcon 500 motor--which we use constantly in FRC--has code already written for it. We NEVER want to remake code that is already written. For that reason, we use vendor libraries that give us already created code for their product. Some specific vendor libraries that you might wanna use:
@@ -75,3 +103,4 @@ Follow these steps to add a vendor to WPILib:
 
 Our repo usually has these automatically installed, but for personal projects this is required.
 ___
+#### Shuffleboard
