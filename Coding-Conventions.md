@@ -91,3 +91,12 @@ public DriveTrain(WPI_TalonFX leftMotorOne, WPI_TalonFX leftMotorTwo, WPI_TalonF
   }
 }
 ```
+As you can see from these examples, we can easily simplify our DriveTrain code to more simplistic standards. Code also highly depends on being readable. Splitting up different things into more methods is usually a good idea because it makes debugging that much easier. Don't try to do everything on one line. Space things out. Complex does not mean better.
+
+### Naming Conventions
+#### Abbreviations 
+Abbreviations might seem like a bad thing, but some names can get really long. You need to be descriptive in naming your variables because when people read the code they need to get the general idea of a variable as soon as they read it. For example, a variable named ```x``` or ```dVar``` aren't descriptive at all. On the other hand, a variable named ```curDriveVelocity``` is super descriptive. Super long variable names are not great though because they can be horrible to type and look ugly. The best of both worlds is using an abbreviated variable name but also adding a comment describing the variable. A good example:
+```java
+int curDriveVel = some number; // current drive velocity declaration
+```
+Only comment on variables that you want to abbreviate. Self explanatory ones or ones with descriptive names don't need it.
