@@ -43,7 +43,28 @@ For parts that are directly above and below each other use
 DigitalInput indexSensorTop = new DigitalInput(id);
 DigitalInput indexSensorBottom = new DigitalInput(id2);
 ```
-For parts that are in line with each other
+For parts that are on the same vertical level but farther on the horizontal, we name them by number as they would seen from the reference point. This means that the closest would be one, then two, then three, etc. Optionally, if there are only two, you can use front and back (front referring to the farthest from the reference point & back referring closest to the reference point).
+```java
+DigitalInput inpOne = new DigitalInput(id); // closest
+DigitalInput inpTwo = new DigitalInput(id2); // farthest
+// optionally, inpOne could be inpBack and inpTwo could be inpFront.
+```
+Finally, if there are multiple of the same parts on both sides of the robot, include the side that it's on. For example, there are usually four motors in total on a drivetrain. If our reference point is the battery then our motor declarations would look something like this:
+```java
+// robot reference point = battery
+Motor leftMotorOne = new Motor(id); // closest motor on the left
+Motor leftMotorTwo = new Motor(id); // farthest motor on the left
+Motor rightMotorOne = new Motor(id); // closest motor on the right
+Motor rightMotorOne = new Motor(id); // farthest motor on the right
+```
+Optionally, we can sub out one and two for front and back because there are only two motors on each side,
+```java
+Motor backLeftMotor = new Motor(id); // closest motor on the left
+Motor frontLeftMotor = new Motor(id); // farthest motor on the left
+Motor backRightMotorOne = new Motor(id); // closest motor on the right
+Motor frontRightMotorOne = new Motor(id); // farthest motor on the right
+```
+> NOTE: 9 times out of 10, the reference point for everything will be on the "back" of the robot. Usually that's where the battery is.
 
 ### Detached Config & Testing
 Configs and Testing are parts of subsystems that setup and analyze the pieces of a subsystem. However, declaring the configs and testing within the constructor gets super messy and creates hard to read code. It's required you split up your subsystem config setups into a function and testing method calls into another. Here is an example of code without this style convention:
@@ -108,9 +129,26 @@ public DriveTrain(WPI_TalonFX leftMotorOne, WPI_TalonFX leftMotorTwo, WPI_TalonF
 As you can see from these examples, we can and should simplify our DriveTrain code to more simplistic standards. Code also highly depends on being readable. Splitting up different things into more methods is usually a good idea because it makes debugging that much easier. Don't try to do everything on one line. Space things out. Complex does not mean better.
 
 ### Naming Conventions
+#### General
+You should be using UPPER_SNAKE_CASE for anything in the constants class. PascalCase varies, but usually instances of higher importance will have those names. camelCase is the average variable.
+
 #### Abbreviations 
 Abbreviations might seem like a bad thing, but some names can get really long. You need to be descriptive in naming your variables because when people read the code they need to get the general idea of a variable as soon as they read it. For example, a variable named ```x``` or ```dVar``` aren't descriptive at all. On the other hand, a variable named ```curDriveVelocity``` is super descriptive. Super long variable names are not great though because they can be horrible to type and look ugly. The best of both worlds is using an abbreviated variable name but also adding a comment describing the variable. A good example:
 ```java
 int curDriveVel = some number; // current drive velocity declaration
 ```
 Only comment on variables that you want to abbreviate. Self explanatory ones or ones with descriptive names don't need it.
+
+### Imports
+This is SUPER important to keeping lines of code readable. When you want to get a constant from the constants class, please import specifically from the **SUB CLASS**.   
+What that looks like in the import statement:
+```java
+import frc.robot.Constants.MOTOR_IO;
+// as opposed to "import frc.robot.Constants"
+```
+While this seems trivial, we will have multiple embedded constants classes in season. What that means is that only importing the Constants class creates a huge chain of indexes to get to the variable we want. Shown here:
+```java
+import frc.robot.Constants
+
+```
+```
