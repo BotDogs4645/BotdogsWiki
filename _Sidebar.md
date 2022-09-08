@@ -1,7 +1,7 @@
 ## Table of Contents
 - [x] [**Home**][home]   
 - [x] [**Getting started**][Gstart]  
-- [ ] [**Coding Conventions**][CConv]    
+- [x] [**Coding Conventions**][CConv]    
 - [ ] [**In-depth Code Breakdown**][bdown]     
 - [ ] [**GitHub**][GConv]    
 - [ ] [**Updating Devices**][dvcupd]
