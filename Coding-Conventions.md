@@ -30,6 +30,20 @@ xboxBinds.get("A").whenPressed(commandOne)
 ___
 ## Code Styling Conventions
 ### Reference Points
+Reference points refer to how we name object variables in relation to parts on the robot. Usually, our reference point is the battery.    
+Here's an example of a single sensor in an Indexer subsystem:
+```java
+DigitalInput indexSensor = new DigitalInput(id);
+```
+This sets up a new digital input. Since we only have one and it's already located in the class file, it can be assumed it's a sensor in the index. However, having that name allows us to be very certain of what the part does and where it's located.    
+It gets more complicated when we introduce multiple sensors.    
+For parts that are directly above and below each other use
+```java
+// one sensor on top, one on bottom
+DigitalInput indexSensorTop = new DigitalInput(id);
+DigitalInput indexSensorBottom = new DigitalInput(id2);
+```
+For parts that are in line with each other
 
 ### Detached Config & Testing
 Configs and Testing are parts of subsystems that setup and analyze the pieces of a subsystem. However, declaring the configs and testing within the constructor gets super messy and creates hard to read code. It's required you split up your subsystem config setups into a function and testing method calls into another. Here is an example of code without this style convention:
@@ -91,7 +105,7 @@ public DriveTrain(WPI_TalonFX leftMotorOne, WPI_TalonFX leftMotorTwo, WPI_TalonF
   }
 }
 ```
-As you can see from these examples, we can easily simplify our DriveTrain code to more simplistic standards. Code also highly depends on being readable. Splitting up different things into more methods is usually a good idea because it makes debugging that much easier. Don't try to do everything on one line. Space things out. Complex does not mean better.
+As you can see from these examples, we can and should simplify our DriveTrain code to more simplistic standards. Code also highly depends on being readable. Splitting up different things into more methods is usually a good idea because it makes debugging that much easier. Don't try to do everything on one line. Space things out. Complex does not mean better.
 
 ### Naming Conventions
 #### Abbreviations 
