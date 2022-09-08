@@ -139,7 +139,50 @@ int curDriveVel = some number; // current drive velocity declaration
 ```
 Only comment on variables that you want to abbreviate. Self explanatory ones or ones with descriptive names don't need it.
 
+### Methods spacing
+Methods spacing is relatively trivial but can make things much nicer. Basically, if a method call has a lot of variables that go into the arguments, space them out onto multiple lines. For example, 
+```java
+// This is super messy. It's hard to read and can be hard to edit for others.
+drive.setDefaultCommand(new RunCommand(() -> drive.joyDrive(-joystick.getY(), joystick.getZ()), drive));
+```
+Try and make code as readable as possible:
+```java
+drive.setDefaultCommand(new RunCommand(
+  () -> drive.joyDrive(-joystick.getY(), joystick.getZ()), drive
+));
+```
+While there are not set rules, spacing out some arguments and putting a long line that makes sense in context into a new line will make things look better. We can see that in the example above, all the args for the ```RunCommand``` are placed onto a new line. That makes it really easy to edit them.
 ### Imports
+
+#### Import structuring
+Split your imports at the top of the screen. Here are the sections you should use:
+```java
+package frc.robot;
+
+// Java base imports
+import java.util.HashMap;
+
+//WPILib imports
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+
+// Vendor imports
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.kauailabs.navx.frc.AHRS;
+
+// in package imports
+import frc.robot.Constants.MOTOR_IO;
+import frc.robot.Constants.MISC;
+import frc.robot.subsystems.DriveTrain;
+```
+Notice the four basic import categories: base java (data structures and basically anything out of vendor stuff), WPILib imports meaning from the wpilibj1 or wpilibj2 classes, Vendor imports from vendors and "in package imports" meaning from the frc.robot package where the file is located. Anything from commands, subsystems, constants, etc are placed there.   
+After creating it like this, most of the light bulb auto completes (automatically imports your class) will fall into this section as well.
+
+#### Constants Imports
 This is SUPER important to keeping lines of code readable. When you want to get a constant from the constants class, please import specifically from the **SUB CLASS**.   
 What that looks like in the import statement:
 ```java
@@ -150,5 +193,14 @@ While this seems trivial, we will have multiple embedded constants classes in se
 ```java
 import frc.robot.Constants
 
-```
+// ...
+WPI_TalonFX talon = new WPI_TalonFX(Constants.IO.MOTOR_IO.DRIVE_TRAIN.ID1);
+
+// while this is exaggerated, we can go up to three or four indexes, which is just too much.
+// this looks much cleaner.
+
+import frc.robot.Constants.IO.MOTOR_IO.DRIVE_TRAIN
+
+// ...
+WPI_TalonFX talon = new WPI_TalonFX(DRIVE_TRAIN.ID1);
 ```
