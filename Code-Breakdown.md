@@ -229,3 +229,5 @@ public class DriveTrain extends SubsystemBase {
   }
 }
 ```
+Refer to the comments for most of the information. Basically, we have a constructor that allows us to put all the motors into a drive system. Then, we have methods that allow us to manipulate those motors. The idea of the subsystem is that any four motors would work. Subsystems are meant to be manipulated. We have our two manipulation methods, ```joyDrive``` and ```voltsDrive```. ```joyDrive``` takes direct input from the joystick (from 0 to 1 of the axis) and then ports that directly to the percentage of the motors power to apply to the drivetrain. Volts drive is more specifically for other things that we might have manipulate the DriveTrain such as a navX and RamseteCommand (read abt in Concepts).
+___
