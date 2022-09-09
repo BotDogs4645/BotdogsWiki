@@ -126,3 +126,106 @@ public class RobotContainer {
   }
 }
 ```
+Super basic version of the RobotContainer. Notice how it's mostly declaration and setup here. No logic. We are declaring motors, subsystems and other parts of hardware that we might need for the robot. I have comments throughout explaining what's going on. Remember, RobotContainer is the very, very first thing that is init'd by the Robot class. It is the first thing started. Notice how it goes from Constructor to configureButtonBindings. That's a good example of what we also do with the testing() and config() methods in our subsystems. 
+___
+### DriveTrain subsystem
+```java
+package frc.robot.subsystems;
+
+// java base imports
+
+// WPILib imports
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+// Vendor imports
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+
+// In package imports
+import frc.robot.Constants.DRIVE_CONSTANTS;
+
+public class DriveTrain extends SubsystemBase {
+  /** Creates a new DriveTrain. */
+  
+  // allows us to have a "testing mode" whenever we want.
+  // Avoid having it all on all the time because analyzation can cause slowness and clutters up Shuffleboard.
+  public boolean testing = false;
+  
+  // Motor instances variables. We are using Falcons, which use integrated Talon controllers.
+  private WPI_TalonFX leftMotorOne;
+  private WPI_TalonFX leftMotorTwo;
+  private WPI_TalonFX rightMotorOne;
+  private WPI_TalonFX rightMotorTwo;
+  
+  // MotorControllerGroups essentially group together motors. This makes it so they follow each other.
+  // Left motor group and right motor group (with ref as battery)
+  private MotorControllerGroup left;
+  private MotorControllerGroup right;
+  
+  // A differential drive is basically a motor group on one side and a motor group on the other side. 
+  // There are three types: Differential, Mecanum and Swerve.
+  // We have all three types of chassis, but Differential is the easiest to explain.
+  private DifferentialDrive drive;
+  
+  public DriveTrain(WPI_TalonFX leftMotorOne, WPI_TalonFX leftMotorTwo, WPI_TalonFX rightMotorOne, WPI_TalonFX rightMotorTwo) {
+    // Take our motors and set them to our instance variables.
+    this.leftMotorOne = leftMotorOne;
+    this.leftMotorTwo = leftMotorTwo;
+    this.rightMotorOne = rightMotorOne;
+    this.rightMotorTwo = rightMotorTwo;
+    
+    // Create our motor controller groups in house.
+    this.left = new MotorControllerGroup(this.leftMotorOne, this.leftMotorTwo);
+    this.right = new MotorControllerGroup(this.rightMotorOne, this.rightMotorTwo);
+    
+    // create our drive in house.
+    this.drive = new DifferentialDrive(left, right);
+    
+    // Configure all parts of the subsystem into modes and settings we need./
+    config();
+    // if we are testing, enable testing mode.
+    if (testing) {
+      enableTesting();
+    }
+    
+  }
+  
+  // we should start doing this with our classes, just so we can easily change configs without the mess in the decl.
+  public void config() {
+    // Motors can either spin clockwise or counterclockwise. Positive means it spins clockwise. However, since we invert the direction
+    // Of the right side motors, we have to invert the right side to match.
+    left.setInverted(false);
+    right.setInverted(true);
+  }
+  
+  // runs testing software to monitor and control specific aspects about the subsystems.
+  public void enableTesting() {
+    ShuffleboardTab tab = Shuffleboard.getTab("Drivetrain"); // gets the "Drivetrain" tab on Shuffleboard
+    ShuffleboardTab tabMain = Shuffleboard.getTab("MAIN");
+    tab.add("drivetrain", this); // Adds the drivetrain class into the shuffleboard tab.
+  }
+
+  public void voltsDrive(double leftVs, double rightVs) { // Vs is a good abrev. for volts
+    left.setVoltage(leftVs); // Motors take a voltage, between 1-12 volts. We are just setting it's voltage directly. More volts = more power.
+    right.setVoltage(rightVs);
+
+    // when setting voltages, make sure to feed the safety system.
+    drive.feed(); // safety systems need a direct input into the DiffDrive class, so when we set left and right
+    // individually, we need to feed the system.
+  }
+
+  public void joyDrive(double Y, double Z) {
+    // add slope later?
+    double fY = Math.min(Y, DRIVE_CONSTANTS.MAX_COEFF); // make sure we can't drive more than a max value.
+    double fZ = Math.min(Z, DRIVE_CONSTANTS.MAX_COEFF);
+    drive.arcadeDrive(fY, fZ); // arcadeDrive means the joystick rotation is the rotation of the robot and front & back control
+    // the forward and back motion of the robot. This method directly relates joystick to movement.
+  }
+
+  @Override
+  public void periodic() {
+    // This method will be called once per scheduler run
+  }
+}
+```
