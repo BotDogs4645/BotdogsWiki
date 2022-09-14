@@ -231,3 +231,51 @@ public class DriveTrain extends SubsystemBase {
 ```
 Refer to the comments for most of the information. Basically, we have a constructor that allows us to put all the motors into a drive system. Then, we have methods that allow us to manipulate those motors. The idea of the subsystem is that any four motors would work. Subsystems are meant to be manipulated. We have our two manipulation methods, ```joyDrive``` and ```voltsDrive```. ```joyDrive``` takes direct input from the joystick (from 0 to 1 of the axis) and then ports that directly to the percentage of the motors power to apply to the drivetrain. Volts drive is more specifically for other things that we might have manipulate the DriveTrain such as a navX and RamseteCommand (read abt in Concepts).
 ___
+### Drive Command (Encoder Drive)
+```java
+package frc.robot.commands;
+
+import edu.wpi.first.wpilibj2.command.CommandBase;
+
+
+import frc.robot.subsystems.DriveTrain;
+
+public class EncoderDrivePrelim extends CommandBase {
+  /** Creates a new EncoderDrivePrelim. */
+  DriveTrain drive;
+  double dist;
+  double speedVs;
+  double initEncoder;
+
+  public EncoderDrivePrelim(DriveTrain drive, double dist, double speedVs) {
+    this.drive = drive;
+    this.dist = dist;
+    this.speedVs = speedVs;
+    addRequirements(drive);
+  }
+
+  // Called when the command is initially scheduled.
+  @Override
+  public void initialize() {
+    this.initEncoder = drive.getEncoderLeft() / 2;
+  }
+
+  // Called every time the scheduler runs while the command is scheduled.
+  @Override
+  public void execute() {
+    drive.voltsDrive(speedVs, -speedVs);
+  }
+
+  // Called once the command ends or is interrupted.
+  @Override
+  public void end(boolean interrupted) {
+    drive.voltsDrive(0, 0);
+  }
+
+  // Returns true when the command should end.
+  @Override
+  public boolean isFinished() {
+    return dist <= Math.abs(drive.getEncoderLeft() - initEncoder); // 10 <= 0 --> false
+  }
+}
+```
