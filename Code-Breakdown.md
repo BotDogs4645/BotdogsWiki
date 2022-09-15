@@ -242,6 +242,7 @@ import frc.robot.subsystems.DriveTrain;
 
 public class EncoderDrivePrelim extends CommandBase {
   /** Creates a new EncoderDrivePrelim. */
+  // Instance variables to store our drivetrain, distance to travel, speed in volts and the initial encoder value.
   DriveTrain drive;
   double dist;
   double speedVs;
@@ -251,31 +252,40 @@ public class EncoderDrivePrelim extends CommandBase {
     this.drive = drive;
     this.dist = dist;
     this.speedVs = speedVs;
+    // We set the requirement to run this command to be the drivetrain subsystem.
+    // this effectively stops all "setDefaultCommand" commands from being scheduled.
     addRequirements(drive);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    this.initEncoder = drive.getEncoderLeft() / 2;
+    // we set our initial encoder value to the one we init at.
+    // since our encoder will most likely not be 0, we have to subtract the initial to get the actual change in
+    // encoder value.
+    this.initEncoder = drive.getEncoderLeft();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    drive.voltsDrive(speedVs, -speedVs);
+    // drive @ the speed we set in the constructor ^
+    drive.voltsDrive(speedVs, speedVs);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    // when the command ends, we want to stop. set both sides voltage to 0.
     drive.voltsDrive(0, 0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return dist <= Math.abs(drive.getEncoderLeft() - initEncoder); // 10 <= 0 --> false
+    // returns a bool that represents "is the absolute change in encoder from where we started greater than the distance we want to travel?
+    // if yes, then return true and end the command because we have driven the requirement.
+    return Math.abs(drive.getEncoderLeft() - initEncoder) <= dist // 10 <= 0 --> false
   }
 }
 ```
