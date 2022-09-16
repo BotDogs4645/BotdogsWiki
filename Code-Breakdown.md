@@ -440,4 +440,79 @@ public class Indexer extends SubsystemBase {
   }
 }
 ```
-This is our indexer subsystem. An indexer, in ball games specifically, takes an object from the intake and stores it within the boundaries of the robot. The indexer needs to be able to store the balls, and then move them towards another position. That other position could be the shooter, or the floor if we want to reject the ball. Usually, an indexer consists of pulleys and motors to drive those pulleys. They can also include hardware switches such as limit switches or beam breaks to enumerate (to classify in number form) positions so we can easily make decisions based on where balls are present. 
+This is our indexer subsystem. An indexer, in ball games specifically, takes an object from the intake and stores it within the boundaries of the robot. The indexer needs to be able to store the balls, and then move them towards another position. That other position could be the shooter, or the floor if we want to reject the ball. Usually, an indexer consists of pulleys and motors to drive those pulleys. They can also include hardware switches such as limit switches or beam breaks to enumerate (to classify in number form) positions so we can easily make decisions based on where balls are present.
+___
+### Index Command
+```java
+package frc.robot.commands;
+
+import edu.wpi.first.wpilibj2.command.CommandBase;
+
+// java base imports
+
+// WPILib imports
+
+// Vendor imports
+
+// In package imports
+import frc.robot.subsystems.Indexer;
+
+public class Index extends CommandBase {
+  /** Creates a new Index. */
+  Indexer indexSub;
+  boolean reject;
+
+  public Index(Indexer indexSub, boolean reject) {
+    this.indexSub = indexSub;
+    this.reject = reject;
+    addRequirements(indexSub);
+  }
+
+  // Called when the command is initially scheduled.
+  @Override
+  public void initialize() {}
+
+  // Called every time the scheduler runs while the command is scheduled.
+  @Override
+  public void execute() {
+    /* here's some psuedocode:
+       if (this is not the reject command) {
+         if (beam is not broken) {
+           set indexSub's top belt to 50% max power;
+         } else {
+           set indexSub's top belt to 0% max power; // not moving
+         }
+         set indexSub's bottom belt speed to 50% max power // we always run the bottom
+       } else {
+         // reverses belt to effectively "reject" the ball.
+         set indexSub's top belt to -50% max power;
+         set indexSub's bottom belt to -50% max power; 
+       }
+     }
+    */
+    if (!reject) {
+      if(!indexSub.isTripped()) {
+        // run top motors if it isnt tripped b/c we can store a ball in there
+        indexSub.setTopBeltSpeed(.5);
+      } else {
+        indexSub.setTopBeltSpeed(0);
+      }
+      indexSub.setBottomBeltSpeed(.5);
+    } else {
+      indexSub.setTopBeltSpeed(-.5);
+      indexSub.setBottomBeltSpeed(-.5);
+    }
+  }
+
+  // Called once the command ends or is interrupted.
+  @Override
+  public void end(boolean interrupted) {}
+
+  // Returns true when the command should end.
+  @Override
+  public boolean isFinished() {
+    return false;
+  }
+}
+``` 
+The execute portion is the most important piece of this sub. You can see all the logic that's present there. The "reject" boolean is set to true and false in two different copies of this command. You can see them in the RobotContainer. Two new Indexes are created with one having "true" and the other "false". The one that is true is only ran when the right bumper is depressed, effectively creating something like a shortcut (just like the "ctrl" in "ctrl+c" to copy. C on it's own will type C on a keyboard, while "ctrl" will modify it to copy.)
