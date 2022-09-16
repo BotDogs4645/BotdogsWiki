@@ -41,7 +41,7 @@ public final class Constants {
 }
 ```
 Constants are variables that don't change. Notice how every single variable has that "Constant" modifier which is ```public static final```.
-Notice the embedded classes, ```MOTOR_IO```, ```MISC```, and ```DRIVE_CONSTANTS```. Comments are included to explain the inclusion of an ID. 
+Notice the embedded classes, ```MOTOR_IO```, ```MISC```, and ```DRIVE_CONSTANTS```. Comments are included to explain the inclusion of the IDs. 
 ___
 ### RobotContainer
 ```java
@@ -283,9 +283,31 @@ public class EncoderDrivePrelim extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    // returns a bool that represents "is the absolute change in encoder from where we started greater than the distance we want to travel?
+    // returns a bool that represents "is the absolute change in encoder from where we started greater than the distance we want to travel?"
     // if yes, then return true and end the command because we have driven the requirement.
-    return Math.abs(drive.getEncoderLeft() - initEncoder) <= dist // 10 <= 0 --> false
+    return Math.abs(drive.getEncoderLeft() - initEncoder) <= dist
   }
 }
 ```
+This is an example of an encoder command. We use encoders to count the rotations of a wheel. That has a lot of uses including reaching specific parts of the field or getting to specific positions relatively. Here are some notes:   
+1. **Motor types**    
+   There are specific types of motors that have built-in encoders. Falcon 500s (our primary motor) and NEOs (we have 0) are the motors that have built in encoders. Others such as CIMs and Mini-CIMs need specific encoder modules. Usually, we don't use motors that don't have encoders when the application requires an encoder. Most likely if you are working with encoders, you're using a Falcon 500 or a Romi.
+   > Romi has built in encoders on DIOs 4, 5 for left and DIOs 6, 7 for right. However, on the educational template, there are methods to retrieve the encoder values directly in inches. Please still review the math in #2 for encoder value calcuations.
+2. **Encoder value calculations**    
+   Integrated Talon controllers sadly do not have direct distance per pulse set methods, so whenever we write a method to return an encoder value that we can understand, we have to do the math there. Usually, that means just converting the motor's counted encoder pulses to something like meters (use metric). You also need to find the gear ratio of the gearbox connected to the motor. Motors used in FRC do not have enough torque to overcome static friction without slowly destroying the motor. We put it through a gearing, which decreases the free speed of the motor and increases the torque. Usually, a gear ratio can be found on the gearbox manufactor's website (we use versaplantaries generally). Here's the general formula, with definitions:     
+   ### ${P_c \over P_r} = R_s$    
+      > Returns shaft rotations.    
+        $P_c =$ the pulse count of the encoder (returned by ```MotorObject.getSelectedSensorPosition()```)    
+        $P_r =$ amount of pulses in a revolution (2048 in Falcon 500 motors)    
+        $R_s =$ shaft rotations.
+   ### ${R_s \over G} = R_w$
+      > Returns wheel rotations    
+        $R_s =$ shaft rotations    
+        $G =$ gearing
+   ### $R_w * D_w * \pi = D_t$
+      > returns distance traveled in meters    
+        $R_w =$ wheel rotations    
+        $D_w =$ diameter of the wheel (in meters)    
+        $D_t =$ distance traveled (in meters)    
+   ### ${P_c \over P_rG} * D_w * \pi = D_t$    
+      > what to put in your code, basically the most simplified version.
