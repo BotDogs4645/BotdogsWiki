@@ -28,3 +28,7 @@ Shuffleboard is basically a huge grid that lets us put widgets onto it. These wi
     ShuffleboardTab tab = Shuffleboard.getTab("tab");
     tab.add("command", myCommand); // adds myCommand and its scheduling info onto that tab.
     ```
+___
+## Non-Essential Tools
+### Phoenix Tuner
+Phoenix Tuner is used to test CTRE devices, which usually consist of Talon SRXs and Falcon 500s (Talon FXs). It's not essential that you have Phoenix Tuner unless you are updating the firmware on some CTRE devices. Check the updating devices tab for more information about how to do that. On Phoenix Tuner, there are tabs 
