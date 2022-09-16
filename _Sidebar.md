@@ -1,5 +1,5 @@
-- [x] [**Home**][home]  
 # Table of Contents
+- [x] [**Home**][home]  
 ## Programming 
 - [x] [**Getting started**][Gstart]  
 - [x] [**Coding Conventions**][CConv]    
