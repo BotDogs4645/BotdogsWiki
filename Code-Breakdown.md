@@ -128,7 +128,7 @@ public class RobotContainer {
 ```
 Super basic version of the RobotContainer. Notice how it's mostly declaration and setup here. No logic. We are declaring motors, subsystems and other parts of hardware that we might need for the robot. I have comments throughout explaining what's going on. Remember, RobotContainer is the very, very first thing that is init'd by the Robot class. It is the first thing started. Notice how it goes from Constructor to configureButtonBindings. That's a good example of what we also do with the testing() and config() methods in our subsystems. 
 ___
-### DriveTrain subsystem
+### DriveTrain Subsystem
 ```java
 package frc.robot.subsystems;
 
@@ -311,3 +311,8 @@ This is an example of an encoder command. We use encoders to count the rotations
         $D_t =$ distance traveled (in meters)    
    ### ${P_c \over P_rG} * D_w * \pi = D_t$    
       > what to put in your code, basically the most simplified version.
+___
+### Indexer Subsystem
+```java
+```
+This is our indexer subsystem. An indexer, in ball games specifically, takes an object from the intake and stores it within the boundaries of the robot. The indexer needs to be able to store the balls, and then move them towards another position. That other position could be the shooter, or the floor if we want to reject the ball. Usually, an indexer consists of pulleys and motors to drive those pulleys. They can also include hardware switches such as limit switches or beam breaks to enumerate (to classify in number form) positions so we can easily make decisions based on where balls are present. 
