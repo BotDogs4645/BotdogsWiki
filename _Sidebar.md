@@ -1,4 +1,4 @@
-## Table of Contents
+# Table of Contents
 ## Programming
 - [x] [**Home**][home]   
 - [x] [**Getting started**][Gstart]  
