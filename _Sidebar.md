@@ -1,4 +1,5 @@
 ## Table of Contents
+### Programming
 - [x] [**Home**][home]   
 - [x] [**Getting started**][Gstart]  
 - [x] [**Coding Conventions**][CConv]    
@@ -6,6 +7,12 @@
 - [ ] [**Tools/Best Friends**][bffs]   
 - [ ] [**GitHub**][GConv]    
 - [ ] [**Updating Devices**][dvcupd]
+___
+### Electronics
+- [ ] [**Wiring Principles**][wirePrin]
+- [ ] [**FRC Control Systems**][frcsys]
+- [ ] [**Types of Sensors**][senstyp]
+
 
 [home]: https://github.com/Aidan747/FRC-Offseason-2022/wiki
 [Gstart]: https://github.com/Aidan747/FRC-Offseason-2022/wiki/Starting-out
