@@ -2,7 +2,7 @@
 - [x] [**Home**][home]   
 - [x] [**Getting started**][Gstart]  
 - [x] [**Coding Conventions**][CConv]    
-- [ ] [**In-depth Code Breakdown**][bdown]     
+- [x] [**In-depth Code Breakdown**][bdown]     
 - [ ] [**GitHub**][GConv]    
 - [ ] [**Updating Devices**][dvcupd]
 
