@@ -35,3 +35,7 @@ Phoenix Tuner is used to test CTRE devices, which usually consist of Talon SRXs 
 
 ### REV Hardware Client
 The REV Hardware Client is essentially Phoenix Tuner but for REV Products (SparkMAXs, NEOs). The typical use case will be for a SPARKMax. To use REV Hardware Client, make sure you have a laptop with it installed. It's likely it isn't on most computers, so if you need to install go to [here](https://docs.revrobotics.com/rev-hardware-client/) and download the latest. Connectivity is a bit different for REV. First, you'll need to find a special orange cable which we usually have at least one of in the Electronics cabinet. Make sure to check the Programming shelf near the Robot Bay as well for one. Plug that into one of the SparkMAXs on the robot and all the different connectivity options should appear. You can make it blink, but not much else without removing it from the roboRIO which the leads probably won't appreciate.
+
+### GitHub Desktop
+For beginners, you should probably use GitHub Desktop. More information about that in the GitHub section. There is also a mini section about doing everything from the command line, so if you are up for the task, you are able to go to the next level.
+
