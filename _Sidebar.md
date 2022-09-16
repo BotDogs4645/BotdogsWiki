@@ -11,7 +11,7 @@ ___
 #### Electronics
 - [ ] [**Wiring Principles**][wirePrin]
 - [ ] [**FRC Control Systems**][frcsys]
-- [ ] [**Types of Sensors**][senstyp]
+- [ ] [**Types of Sensors**][senstype]
 
 
 [home]: https://github.com/Aidan747/FRC-Offseason-2022/wiki
@@ -21,3 +21,6 @@ ___
 [bdown]: https://github.com/Aidan747/FRC-Offseason-2022/wiki/Code-Breakdown
 [dvcupd]: https://github.com/Aidan747/FRC-Offseason-2022/wiki/Updating-devices
 [bffs]: https://github.com/Aidan747/FRC-Offseason-2022/wiki/Tools
+[wirePrin]: x
+[frcsys]: frcsys
+[senstype]: x
