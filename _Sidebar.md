@@ -1,5 +1,5 @@
 ## Table of Contents
-### Programming
+#### Programming
 - [x] [**Home**][home]   
 - [x] [**Getting started**][Gstart]  
 - [x] [**Coding Conventions**][CConv]    
@@ -8,7 +8,7 @@
 - [ ] [**GitHub**][GConv]    
 - [ ] [**Updating Devices**][dvcupd]
 ___
-### Electronics
+#### Electronics
 - [ ] [**Wiring Principles**][wirePrin]
 - [ ] [**FRC Control Systems**][frcsys]
 - [ ] [**Types of Sensors**][senstyp]
