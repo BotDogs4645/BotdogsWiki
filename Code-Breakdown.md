@@ -314,5 +314,85 @@ This is an example of an encoder command. We use encoders to count the rotations
 ___
 ### Indexer Subsystem
 ```java
+package frc.robot.subsystems;
+
+// java base imports
+
+// WPILib imports
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+
+// Vendor imports
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+
+
+// In package imports
+import frc.robot.Constants.*;
+
+public class Indexer extends SubsystemBase {
+  /** Creates a new Indexer. */
+
+  public boolean testing = true;
+
+  private WPI_TalonFX top;
+  private WPI_TalonFX bottom;
+
+  private DigitalInput beam;
+
+  public Indexer(WPI_TalonFX top, WPI_TalonFX bottom, DigitalInput beam) {
+    this.top = top;
+    this.bottom = bottom;
+    this.beam = beam;
+
+    if (testing) {
+      enableTesting();
+    }
+  }
+
+  public void config() {
+    top.setNeutralMode(NeutralMode.Brake);
+    bottom.setNeutralMode(NeutralMode.Brake);
+  }
+
+  public void setBottomBeltSpeed(double percent) {
+    bottom.setVoltage(INDEXER_CONSTANTS.MAX_VOLTS * percent);
+  }
+
+  public void setTopBeltSpeed(double percent) {
+    top.setVoltage(INDEXER_CONSTANTS.MAX_VOLTS * percent);
+  }
+
+  public double getBottomBeltSpeed() {
+    return bottom.get();
+  }
+
+  public double getTopBeltSpeed() {
+    return top.get();
+  }
+
+  public boolean isTripped() {
+    return beam.get();
+  }
+
+  public void idle() {
+    setTopBeltSpeed(0);
+    setBottomBeltSpeed(0);
+  }
+
+  public void enableTesting() {
+    ShuffleboardTab indexerTab = Shuffleboard.getTab("Indexer");
+    indexerTab.addString("Top Belt Speed", () -> getBottomBeltSpeed() * 100 + "%");
+    indexerTab.addString("Bottom Belt Speed", () -> getTopBeltSpeed() * 100 + "%");
+    indexerTab.addBoolean("Beam Trip", () -> isTripped());
+  }
+
+  @Override
+  public void periodic() {
+    // This method will be called once per scheduler run
+  }
+}
 ```
 This is our indexer subsystem. An indexer, in ball games specifically, takes an object from the intake and stores it within the boundaries of the robot. The indexer needs to be able to store the balls, and then move them towards another position. That other position could be the shooter, or the floor if we want to reject the ball. Usually, an indexer consists of pulleys and motors to drive those pulleys. They can also include hardware switches such as limit switches or beam breaks to enumerate (to classify in number form) positions so we can easily make decisions based on where balls are present. 
