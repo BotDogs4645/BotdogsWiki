@@ -7,7 +7,6 @@
 - [ ] [**Tools/Best Friends**][bffs]   
 - [ ] [**GitHub**][GConv]    
 - [ ] [**Updating Devices**][dvcupd]
-___
 ## Electronics
 - [ ] [**Wiring Principles**][wirePrin]
 - [ ] [**FRC Control Systems**][frcsys]
