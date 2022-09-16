@@ -1,6 +1,6 @@
 # Table of Contents
-## Programming
-- [x] [**Home**][home]   
+- [x] [**Home**][home]  
+## Programming 
 - [x] [**Getting started**][Gstart]  
 - [x] [**Coding Conventions**][CConv]    
 - [x] [**In-depth Code Breakdown**][bdown]  
