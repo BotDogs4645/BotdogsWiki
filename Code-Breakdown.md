@@ -12,13 +12,19 @@ package frc.robot;
 
 public final class Constants {
     public static final class MOTOR_IO {
-        // motor ids go from back to front, ref as battery (closest to battery -> 1)
-        // left motor IO
-        public static final int LEFT_ONE = 10;
-        public static final int LEFT_TWO = 7;
-        // right motor IO
-        public static final int RIGHT_ONE = 9;
-        public static final int RIGHT_TWO = 8;
+        public static final class DRIVE_IO {
+        // drive motor ids go from back to front, ref as battery (closest to battery -> 1)
+            // left motor IO
+            public static final int LEFT_ONE = 10;
+            public static final int LEFT_TWO = 7;
+            // right motor IO
+            public static final int RIGHT_ONE = 9;
+            public static final int RIGHT_TWO = 8;
+        }
+        public static final class INDEX_IO {
+            public static final int TOP = 5;
+            public static final int BOTTOM = 3;
+        }
     }
     
     public static final class MISC {
@@ -36,7 +42,16 @@ public final class Constants {
     }
 
     public static final class DRIVE_CONSTANTS {
-        public static final double MAX_COEFF = .8; // highest percentage output that the joystick will accept from the motors (80%)
+        public static final double MAX_COEFF = .8;
+        public static final double GEAR_RATIO = 1 / 10.71;
+        public static final double ENCODER_TICKS = 2048.0;
+        public static final double WHEEL_DIAMETER = 6; // in inches 
+        public static final double WHEEL_CIRCUMFRENCE = Units.inchesToMeters(WHEEL_DIAMETER) * Math.PI;
+        // circ = d*pi
+    }
+    
+    public static final class INDEXER_CONSTANTS {
+        public static final double MAX_VOLTS = 12;
     }
 }
 ```
@@ -54,18 +69,25 @@ import java.util.HashMap;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj.DigitalInput;
 
 // Vendor imports
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.kauailabs.navx.frc.AHRS;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+
 
 // in package imports
-import frc.robot.Constants.MOTOR_IO;
+import frc.robot.Constants.MOTOR_IO.DRIVE_IO;
+import frc.robot.Constants.MOTOR_IO.INDEX_IO;
+import frc.robot.commands.EncoderDrivePrelim;
+import frc.robot.commands.Index;
 import frc.robot.Constants.MISC;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Indexer;
 
 public class RobotContainer {
   /* 
@@ -84,6 +106,13 @@ public class RobotContainer {
 
   // Our custom DriveTrain subclass, which is mentioned below.
   private DriveTrain drive = new DriveTrain(leftOne, leftTwo, rightOne, rightTwo);
+
+  // Indexer
+  WPI_TalonFX indexTop = new WPI_TalonFX(INDEX_IO.TOP);
+  WPI_TalonFX indexBottom = new WPI_TalonFX(INDEX_IO.BOTTOM);
+  DigitalInput beam = new DigitalInput(4); // DIO 4 on roboRIO
+
+  Indexer index = new Indexer(indexTop, indexBottom, beam);
 
   // Joystick & navX (is static so it can be referenced anywhere)
   public static final Joystick joystick = new Joystick(0); // identify your peripheral ids on DS
@@ -111,6 +140,17 @@ public class RobotContainer {
     drive.setDefaultCommand(new RunCommand(
       () -> drive.joyDrive(-joystick.getY(), joystick.getZ()), drive)
     );
+    index.setDefaultCommand(new RunCommand(
+      () -> index.idle(), index)
+    );
+
+    // binds buttons on the xbox cont to commands
+    xboxBinds.get("A").toggleWhenPressed(new EncoderDrivePrelim(drive, 2, 4)); // drives 2 meters @ 4 volts
+    xboxBinds.get("B").toggleWhenPressed(new ConditionalCommand(
+      new Index(index, true), new Index(index, false), () -> xbox.getRightTriggerAxis() > .5)
+    ); // basically, when we press a button we see if the right trigger is pulled.
+    // if it is, reject the ball. if it isn't, intake. it's on a toggle system as well.
+
     // Configure the button bindings
     configureButtonBindings();
   }
@@ -193,10 +233,9 @@ public class DriveTrain extends SubsystemBase {
   
   // we should start doing this with our classes, just so we can easily change configs without the mess in the decl.
   public void config() {
-    // Motors can either spin clockwise or counterclockwise. Positive means it spins clockwise. However, since we invert the direction
-    // Of the right side motors, we have to invert the right side to match.
+    // Motors can either spin clockwise or counterclockwise. Positive .set() values means it spins clockwise. Vice versa with negative.
     left.setInverted(false);
-    right.setInverted(true);
+    right.setInverted(false);
   }
   
   // runs testing software to monitor and control specific aspects about the subsystems.
@@ -216,11 +255,9 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void joyDrive(double Y, double Z) {
-    // add slope later?
-    double fY = Math.min(Y, DRIVE_CONSTANTS.MAX_COEFF); // make sure we can't drive more than a max value.
-    double fZ = Math.min(Z, DRIVE_CONSTANTS.MAX_COEFF);
-    drive.arcadeDrive(fY, fZ); // arcadeDrive means the joystick rotation is the rotation of the robot and front & back control
-    // the forward and back motion of the robot. This method directly relates joystick to movement.
+    drive.arcadeDrive(Y * DRIVE_CONSTANTS.MAX_COEFF, Z * DRIVE_CONSTANTS.MAX_COEFF); 
+    // arcadeDrive means the joystick rotation is the rotation of the robot and front & back movement of the stick
+    // controls forward and back motion of the robot. This method directly relates joystick to movement.
   }
 
   @Override
@@ -346,15 +383,29 @@ public class Indexer extends SubsystemBase {
     this.top = top;
     this.bottom = bottom;
     this.beam = beam;
-
+    
+    config();
     if (testing) {
       enableTesting();
     }
   }
 
   public void config() {
+    // neutral mode essentially means what it does at 0% rpm.
+    // does it keep going or is it gonna brake?
+    // we want it to brake.
     top.setNeutralMode(NeutralMode.Brake);
     bottom.setNeutralMode(NeutralMode.Brake);
+  }
+
+  public void enableTesting() {
+    // here is a bunch of shuffleboard code,
+    // this is essentially how you view variables in real time.
+    // that "() -> method call" is just a "variable supplier". it returns a value and is sent to shuffleboard
+    ShuffleboardTab indexerTab = Shuffleboard.getTab("Indexer");
+    indexerTab.addString("Top Belt Speed", () -> getBottomBeltSpeed() * 100 + "%");
+    indexerTab.addString("Bottom Belt Speed", () -> getTopBeltSpeed() * 100 + "%");
+    indexerTab.addBoolean("Beam Trip", () -> isTripped());
   }
 
   public void setBottomBeltSpeed(double percent) {
@@ -366,27 +417,21 @@ public class Indexer extends SubsystemBase {
   }
 
   public double getBottomBeltSpeed() {
-    return bottom.get();
+    // get returns speed from -100% to 100% of it's maximum speed.
+    return bottom.get(); // get the bottom belt speed in indices [-1, 1]
   }
 
   public double getTopBeltSpeed() {
-    return top.get();
+    return top.get(); // get the top belt speed in indices [-1, 1]
   }
 
   public boolean isTripped() {
-    return beam.get();
+    return beam.get(); // if the beam is tripped, return true.
   }
 
   public void idle() {
     setTopBeltSpeed(0);
     setBottomBeltSpeed(0);
-  }
-
-  public void enableTesting() {
-    ShuffleboardTab indexerTab = Shuffleboard.getTab("Indexer");
-    indexerTab.addString("Top Belt Speed", () -> getBottomBeltSpeed() * 100 + "%");
-    indexerTab.addString("Bottom Belt Speed", () -> getTopBeltSpeed() * 100 + "%");
-    indexerTab.addBoolean("Beam Trip", () -> isTripped());
   }
 
   @Override
