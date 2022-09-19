@@ -108,11 +108,11 @@ public class RobotContainer {
   private DriveTrain drive = new DriveTrain(leftOne, leftTwo, rightOne, rightTwo);
 
   // Indexer
-  WPI_TalonFX indexTop = new WPI_TalonFX(INDEX_IO.TOP);
-  WPI_TalonFX indexBottom = new WPI_TalonFX(INDEX_IO.BOTTOM);
-  DigitalInput beam = new DigitalInput(4); // DIO 4 on roboRIO
+  private WPI_TalonFX indexTop = new WPI_TalonFX(INDEX_IO.TOP);
+  private WPI_TalonFX indexBottom = new WPI_TalonFX(INDEX_IO.BOTTOM);
+  private DigitalInput beam = new DigitalInput(4); // DIO 4 on roboRIO
 
-  Indexer index = new Indexer(indexTop, indexBottom, beam);
+  private Indexer index = new Indexer(indexTop, indexBottom, beam);
 
   // Joystick & navX (is static so it can be referenced anywhere)
   public static final Joystick joystick = new Joystick(0); // identify your peripheral ids on DS
