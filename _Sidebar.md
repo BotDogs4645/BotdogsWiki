@@ -4,7 +4,7 @@
 - [x] [**Getting started**][Gstart]  
 - [x] [**Coding Conventions**][CConv]    
 - [x] [**In-depth Code Breakdown**][bdown]  
-- [ ] [**Tools/Best Friends**][bffs]   
+- [x] [**Tools**][bffs]   
 - [ ] [**GitHub**][GConv]    
 - [ ] [**Updating Devices**][dvcupd]
 ## Electronics
