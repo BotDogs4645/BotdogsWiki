@@ -39,3 +39,5 @@ The REV Hardware Client is essentially Phoenix Tuner but for REV Products (Spark
 ### GitHub Desktop
 For beginners, you should probably use GitHub Desktop. More information about that in the GitHub section. There is also a mini section about doing everything from the command line, so if you are up for the task, you are able to go to the next level.
 
+### MATLAB / Simulink    
+MATLAB & Simulink are pieces of software that allow us to import CAD directly into software and simulate physics with it. We also use Simulink to simulate entire subsystems. What that means is that even before we test it out on the field, we are able to see how game objects react to their environments. Simulink is not required to be known by the programmers, but is super useful nonetheless.
