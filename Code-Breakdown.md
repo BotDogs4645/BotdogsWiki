@@ -8,12 +8,12 @@ package frc.robot;
 
 // Constants class, usable anywhere if imported. 
 // DO NOT SOLELY IMPORT THE CONSTANTS CLASS
-// It looks ugly and refs get very long very quickly.
+// It looks ugly, and refs get very long very quickly.
 
 public final class Constants {
     public static final class MOTOR_IO {
         public static final class DRIVE_IO {
-        // drive motor ids go from back to front, ref as battery (closest to battery -> 1)
+        // drive motor ids go from back to front, ref as the battery (closest to battery -> 1)
             // left motor IO
             public static final int LEFT_ONE = 10;
             public static final int LEFT_TWO = 7;
@@ -166,7 +166,7 @@ public class RobotContainer {
   }
 }
 ```
-Super basic version of the RobotContainer. Notice how it's mostly declaration and setup here. No logic. We are declaring motors, subsystems and other parts of hardware that we might need for the robot. I have comments throughout explaining what's going on. Remember, RobotContainer is the very, very first thing that is init'd by the Robot class. It is the first thing started. Notice how it goes from Constructor to configureButtonBindings. That's a good example of what we also do with the testing() and config() methods in our subsystems. 
+A basic version of the RobotContainer. Notice how it's mostly declaration and setup here. No logic. We declare motors, subsystems, and other parts of hardware that we might need for the robot. I have comments throughout explaining what's going on. Remember, RobotContainer is the very, very first thing that is init'd by the Robot class. It is the first thing that starts. Notice how it goes from the constructor to configureButtonBindings. That's an excellent example of what we also do with our subsystems' testing() and config() methods. 
 ___
 ### DriveTrain Subsystem
 ```java
@@ -189,7 +189,7 @@ public class DriveTrain extends SubsystemBase {
   /** Creates a new DriveTrain. */
   
   // allows us to have a "testing mode" whenever we want.
-  // Avoid having it all on all the time because analyzation can cause slowness and clutters up Shuffleboard.
+  // Avoid having it all on all the time because the analysis can cause slowness and clutters up Shuffleboard.
   public boolean testing = false;
   
   // Motor instances variables. We are using Falcons, which use integrated Talon controllers.
@@ -198,13 +198,13 @@ public class DriveTrain extends SubsystemBase {
   private WPI_TalonFX rightMotorOne;
   private WPI_TalonFX rightMotorTwo;
   
-  // MotorControllerGroups essentially group together motors. This makes it so they follow each other.
+  // MotorControllerGroups essentially group together motors. This makes them follow each other.
   // Left motor group and right motor group (with ref as battery)
   private MotorControllerGroup left;
   private MotorControllerGroup right;
   
   // A differential drive is basically a motor group on one side and a motor group on the other side. 
-  // There are three types: Differential, Mecanum and Swerve.
+  // There are three types: Differential, Mecanum, and Swerve.
   // We have all three types of chassis, but Differential is the easiest to explain.
   private DifferentialDrive drive;
   
@@ -215,11 +215,11 @@ public class DriveTrain extends SubsystemBase {
     this.rightMotorOne = rightMotorOne;
     this.rightMotorTwo = rightMotorTwo;
     
-    // Create our motor controller groups in house.
+    // Create our motor controller groups in-house.
     this.left = new MotorControllerGroup(this.leftMotorOne, this.leftMotorTwo);
     this.right = new MotorControllerGroup(this.rightMotorOne, this.rightMotorTwo);
     
-    // create our drive in house.
+    // create our drive in-house.
     this.drive = new DifferentialDrive(left, right);
     
     // Configure all parts of the subsystem into modes and settings we need./
@@ -231,7 +231,6 @@ public class DriveTrain extends SubsystemBase {
     
   }
   
-  // we should start doing this with our classes, just so we can easily change configs without the mess in the decl.
   public void config() {
     // Motors can either spin clockwise or counterclockwise. Positive .set() values means it spins clockwise. Vice versa with negative.
     left.setInverted(false);
@@ -266,7 +265,7 @@ public class DriveTrain extends SubsystemBase {
   }
 }
 ```
-Refer to the comments for most of the information. Basically, we have a constructor that allows us to put all the motors into a drive system. Then, we have methods that allow us to manipulate those motors. The idea of the subsystem is that any four motors would work. Subsystems are meant to be manipulated. We have our two manipulation methods, ```joyDrive``` and ```voltsDrive```. ```joyDrive``` takes direct input from the joystick (from 0 to 1 of the axis) and then ports that directly to the percentage of the motors power to apply to the drivetrain. Volts drive is more specifically for other things that we might have manipulate the DriveTrain such as a navX and RamseteCommand (read abt in Concepts).
+Refer to the comments for most of the information. We have a constructor that lets us put all the motors into a drive system. Then, we have methods that will enable us to manipulate those motors. The idea of the subsystem is that any four motors would work. Subsystems are meant to be manipulated. We have two manipulation methods, ```joyDrive``` and ```voltsDrive```. ```joyDrive``` takes direct input from the joystick (from 0 to 1 of the axis) and then ports that directly to the percentage of the motor's power to apply to the drivetrain. Volts drive is more specifically for other things we might have to manipulate the DriveTrain, such as a navX and RamseteCommand (read abt in Concepts).
 ___
 ### Drive Command (Encoder Drive)
 ```java
@@ -279,7 +278,7 @@ import frc.robot.subsystems.DriveTrain;
 
 public class EncoderDrivePrelim extends CommandBase {
   /** Creates a new EncoderDrivePrelim. */
-  // Instance variables to store our drivetrain, distance to travel, speed in volts and the initial encoder value.
+  // Instance variables to store our drivetrain, distance to travel, speed in volts, and the initial encoder value.
   DriveTrain drive;
   double dist;
   double speedVs;
@@ -326,12 +325,12 @@ public class EncoderDrivePrelim extends CommandBase {
   }
 }
 ```
-This is an example of an encoder command. We use encoders to count the rotations of a wheel. That has a lot of uses including reaching specific parts of the field or getting to specific positions relatively. Here are some notes:   
+This is an example of an encoder command. We use encoders to count the rotations of a wheel. That has a lot of uses, including reaching specific parts of the field or moving to specific positions relatively. Here are some notes:   
 1. **Motor types**    
-   There are specific types of motors that have built-in encoders. Falcon 500s (our primary motor) and NEOs (we have 0) are the motors that have built in encoders. Others such as CIMs and Mini-CIMs need specific encoder modules. Usually, we don't use motors that don't have encoders when the application requires an encoder. Most likely if you are working with encoders, you're using a Falcon 500 or a Romi.
-   > Romi has built in encoders on DIOs 4, 5 for left and DIOs 6, 7 for right. However, on the educational template, there are methods to retrieve the encoder values directly in inches. Please still review the math in #2 for encoder value calcuations.
+   There are specific types of motors that have built-in encoders. Falcon 500s (our primary motor) and NEOs (we have 0) are motors that have built-in encoders. Others, such as CIMs and Mini-CIMs, need specific encoder modules. Usually, we don't use motors that don't have encoders when the application requires an encoder. Most likely, if you are working with encoders, you're using a Falcon 500 or a Romi.
+   > Romi has built-in encoders on DIOs 4 and 5 for left and DIOs 6 and 7 for right. However, there are methods to retrieve the encoder values directly in inches on the educational template. Please still review the math in #2 for encoder value calculations.
 2. **Encoder value calculations**    
-   Integrated Talon controllers sadly do not have direct distance per pulse set methods, so whenever we write a method to return an encoder value that we can understand, we have to do the math there. Usually, that means just converting the motor's counted encoder pulses to something like meters (use metric). You also need to find the gear ratio of the gearbox connected to the motor. Motors used in FRC do not have enough torque to overcome static friction without slowly destroying the motor. We put it through a gearing, which decreases the free speed of the motor and increases the torque. Usually, a gear ratio can be found on the gearbox manufactor's website (we use versaplantaries generally). Here's the general formula, with definitions:     
+   Integrated Talon controllers sadly do not have direct distance per pulse set methods, so whenever we write a method to return an encoder value that we can understand, we have to do the math there. Usually, that means just converting the motor's counted encoder pulses to meters (use metric). You also need to find the gear ratio of the gearbox connected to the motor. Motors used in FRC do not have enough torque to overcome static friction without slowly destroying the motor. We put it through a gearing, which decreases the free speed of the motor and increases the torque. Usually, a gear ratio can be found on the gearbox manufacturer's website (we use versaplantaries generally). Here's the general formula, with definitions:     
    ### ${P_c \over P_r} = R_s$    
       > Returns shaft rotations.    
         $P_c =$ the pulse count of the encoder (returned by ```MotorObject.getSelectedSensorPosition()```)    
@@ -440,7 +439,7 @@ public class Indexer extends SubsystemBase {
   }
 }
 ```
-This is our indexer subsystem. An indexer, in ball games specifically, takes an object from the intake and stores it within the boundaries of the robot. The indexer needs to be able to store the balls, and then move them towards another position. That other position could be the shooter, or the floor if we want to reject the ball. Usually, an indexer consists of pulleys and motors to drive those pulleys. They can also include hardware switches such as limit switches or beam breaks to enumerate (to classify in number form) positions so we can easily make decisions based on where balls are present.
+This is our indexer subsystem. An indexer, in ball games specifically, takes an object from the intake and stores it within the boundaries of the robot. The indexer needs to be able to store the balls and then move them towards another position. That other position could be the shooter or the floor if we want to reject the ball. Usually, an indexer consists of pulleys and motors to drive those pulleys. They can also include hardware switches such as limit switches, or beam breaks to enumerate (to classify in number form) positions so we can easily decide where balls are present.
 ___
 ### Index Command
 ```java
@@ -515,4 +514,4 @@ public class Index extends CommandBase {
   }
 }
 ``` 
-The execute portion is the most important piece of this sub. You can see all the logic that's present there. The "reject" boolean is set to true and false in two different copies of this command. You can see them in the RobotContainer. Two new Indexes are created with one having "true" and the other "false". The one that is true is only ran when the right bumper is depressed, effectively creating something like a shortcut (just like the "ctrl" in "ctrl+c" to copy. C on it's own will type C on a keyboard, while "ctrl" will modify it to copy.)
+The execute portion is the most critical piece of this sub. You can see all the logic that's present there. The "reject" boolean is set to true and false in two different copies of this command. You can see them in the RobotContainer. Two new Indexes are created, with one having "true" and the other "false." The "true" one is only run when the right bumper is depressed, effectively creating something like a shortcut (just like the "ctrl" in "ctrl+c" to copy. C on its own will type C on a keyboard, while "ctrl" will modify it to copy.)
