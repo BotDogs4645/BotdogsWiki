@@ -341,12 +341,12 @@ This is an example of an encoder command. We use encoders to count the rotations
         $R_s =$ shaft rotations    
         $G =$ gearing
    ### $R_w * D_w * \pi = D_t$
-      > returns distance traveled in meters    
+      > Returns distance traveled in meters    
         $R_w =$ wheel rotations    
         $D_w =$ diameter of the wheel (in meters)    
         $D_t =$ distance traveled (in meters)    
    ### ${P_c \over P_rG} * D_w * \pi = D_t$    
-      > what to put in your code, basically the most simplified version.
+      > What to put in your code, basically the most simplified version.
 ___
 ### Indexer Subsystem
 ```java
