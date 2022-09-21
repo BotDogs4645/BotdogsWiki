@@ -21,3 +21,4 @@ Here's a guide to flash CTRE Products in general:
 Although it can be a little annoying, flashing a roboRIO can be really pivotal if you're having constant issues with trying to communicate with the robot. Here are the steps to flashing a roboRIO:
 1. Determine if it's a roboRIO or roboRIO 2. If it's a roboRIO 1 then ask a lead to help. If it's a roboRIO 2, then continue these steps.
 2. Determine if there is an SD card already in the roboRIO. There is a small port on the roboRIO that reads "SD" in the shape of an SD card.
+3. If there isn't, grab a new one. If there is, eject the SD card. If you don't have nails, use a screwdriver but be extremely careful.
