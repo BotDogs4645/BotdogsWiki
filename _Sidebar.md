@@ -5,8 +5,9 @@
 - [x] [**Coding Conventions**][CConv]    
 - [x] [**In-depth Code Breakdown**][bdown]  
 - [x] [**Tools**][bffs]   
+- [ ] [**Updating Devices**][dvcupd]    
 - [ ] [**GitHub**][GConv]    
-- [ ] [**Updating Devices**][dvcupd]
+
 ## Electronics
 - [ ] [**Wiring Principles**][wirePrin]
 - [ ] [**FRC Control Systems**][frcsys]
