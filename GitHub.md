@@ -1,1 +1,2 @@
-plchldr
+#### Why GitHub?
+Version control and centralized collaboration. Being able to push code and have it revised is very useful. Being able to see code and use it from anywhere without having to copy and paste emails or exchanging SD cards and hard drives is crucial. Even if you're on a satellite team, you'll be using GitHub because it makes code review and collaboration that much easier. 
