@@ -1,5 +1,5 @@
 #### Why GitHub?
-Version control and centralized collaboration. Being able to push code and have it revised. Being able to see code and use it from anywhere without having to copy and paste emails or exchange SD cards and hard drives is crucial. Even if you're on a satellite team, you'll be using GitHub because it makes code review and collaboration that much easier. 
+Version control and centralized collaboration. Being able to push code and have it revised. Being able to see code and use it from anywhere without having to copy and paste emails or exchange SD cards and hard drives. Even if you're on a satellite team, you'll be using GitHub because it makes code review and collaboration that much easier. 
 
 ## GitHub Desktop    
 GitHub Desktop is an application that adapts the Git environment into GUI form. GitHub Desktop is recommended for everyone first starting out with the Git environment and should make things a lot easier for everyone. I can't stress the importance of pushing code changes and version control.
