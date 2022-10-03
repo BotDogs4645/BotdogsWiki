@@ -6,7 +6,7 @@
 - [x] [**In-depth Code Breakdown**][bdown]  
 - [x] [**Tools**][bffs]   
 - [x] [**Updating Devices**][dvcupd]    
-- [ ] [**GitHub**][GConv]    
+- [x] [**GitHub**][GConv]    
 
 ## Electronics
 - [ ] [**Wiring Principles**][wirePrin]
