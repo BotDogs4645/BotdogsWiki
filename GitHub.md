@@ -12,7 +12,7 @@ GitHub Desktop is an application that adapts the Git environment into GUI form. 
 6. Login and setup your account.
 
 #### Basics
-Let's say that we write a codebase for Robotics, and we want to share that codebase with the programming sub team so they can also make contributions. What we do is publish that codebase onto GitHub. Everyone can **pull** the repo (what the codebase is called on GitHub). What pulling actually does is it creates a local repository on your device, which you can make direct changes to. After your done editing your local repository, you can **commit** the changes, which essentially confirms all the changes you made onto your local repo. Then, you can **push** your local repo, which essentially replaces the repo on GitHub with your local repo. Changes that your friend has made can be **pulled** at any time.
+Let's say that we write a codebase for Robotics, and we want to share that codebase with the programming sub team so they can also make contributions. What we do is publish that codebase onto GitHub. Everyone can **pull** the repo (what the codebase is called on GitHub), and creates a local repository on your device, which you can make direct changes to. After your done editing your local repository, you can **commit** the changes, which essentially confirms all the changes you made onto your local repo. Then, you can **push** your local repo, which essentially replaces the repo on GitHub with your local repo. Changes that your friend has made can be **pulled** at any time.
 > I highly suggest doing the "Create a tutorial Repository" introduction on GitHub Desktop. 
 
 #### How to Clone a Repo
