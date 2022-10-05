@@ -9,9 +9,9 @@
 - [x] [**GitHub**][GConv]    
 
 ## Electronics
-- [ ] [**Wiring Principles**][wirePrin]
-- [ ] [**FRC Control Systems**][frcsys]
-- [ ] [**Types of Sensors**][senstype]
+- [ ] [**Wiring Principles**][]
+- [ ] [**FRC Control Systems**][]
+- [ ] [**Types of Sensors**][]
 
 
 [home]: https://github.com/Aidan747/FRC-Offseason-2022/wiki
