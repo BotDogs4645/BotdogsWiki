@@ -339,7 +339,7 @@ This is an example of an encoder command. We use encoders to count the rotations
    ### ${R_s \over G} = R_w$
       > Returns wheel rotations    
         $R_s =$ shaft rotations    
-        $G =$ gearing
+        $G =$ gearing    
         $R_w =$ wheel rotations
    ### $R_w * D_w * \pi = D_t$
       > Returns distance traveled in meters    
