@@ -41,7 +41,7 @@ ___
 * **A quick review:** To start, the ```Main``` class is activated by the "starter method," which is named main. You usually write in this method when learning in AP CS A. Then, the ```main``` method activates the ```Robot``` class. The ```Robot``` class begins to loop through methods that fit the robot's state. Also, the RobotInit method (the first method that's called by the Robot) initializes the ```RobotContainer``` class. The ```RobotContainer``` only runs once, starting with the constructor and then through each of its methods. You can track where it goes and when by following the constructor and following the chain of method calls.   
 ___
 #### Building & Deploying 
-*Building* a program is interpreting and compiling the code. The code is checked and then approved by the interpreter. This catches all syntax errors but no logic errors. You can build a program at home by using the *CTRL+SHIFT+P* window and then typing Build and choosing the "WPILib:" option.    
+*Building* a program is interpreting and compiling the code. The code is checked and then approved by the interpreter. This catches all the syntax errors but not the logic errors. You can build a program at home by using the *CTRL+SHIFT+P* window and then typing Build and choosing the "WPILib:" option.    
 
 *Deploying* a program means deploying the code to the Robot. This is the only way to detect logic errors other than through the simulator. Deploying builds the program first, so any syntax errors not highlighted will be seen. You can deploy a program using the *CTRL+SHIFT+P* window and then typing "Deploy Robot Code" while connected to the Robot. Refer to the RoboRIO section for information about debug messages.
 ___
