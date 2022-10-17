@@ -82,7 +82,7 @@ Here are some to look out for:
     * ${\color{red}\text{Red}}$: test
 ___
 #### Vendors
-Vendors create free software that pairs with their hardware. For example, a Falcon 500 motor- which we constantly use in FRC- already has code for it. We NEVER want to remake code that is already written. Therefore, we use vendor libraries that give us already created code for their product. Some specific vendor libraries that you might want to use:
+Vendors create free software that pair with their hardware. For example, a Falcon 500 motor (which we constantly use) already has code for it. We NEVER want to rewrite code that is already written. Therefore, we use these vendor libraries that provide us code for their product. Some specific vendor libraries that you might want to use:
 * CTRE (Cross the Road Electronics)   
     ```https://maven.ctr-electronics.com/release/com/ctre/phoenix/Phoenix-frc2022-latest.json```
 * Kauai Labs    
@@ -101,7 +101,7 @@ Follow these steps to add a vendor to WPILib:
 5. Paste your online install link.
 6. Say yes to the pop-up or rebuild program.    
 
-Our repo usually has these automatically installed, but for personal projects, this is required.
+Our repo usually has these ready, but for personal projects this will be required.
 ___
 #### Shuffleboard
 Shuffleboard is the primary way to get I/O from the robot. We can put different tabs onto Shuffleboard, which can correlate to other subsystems. We can also have a general tab for most things we'd need to see during the competition. Shuffleboard has some pretty easy and rather tricky setups, so refer to the Shuffleboard in Coding Conventions. 
