@@ -265,7 +265,7 @@ public class DriveTrain extends SubsystemBase {
   }
 }
 ```
-Refer to the comments for most of the information. We have a constructor that lets us put all the motors into a drive system. Then, we have methods that will enable us to manipulate those motors. The idea of the subsystem is that any four motors would work. Subsystems are meant to be manipulated. We have two manipulation methods, ```joyDrive``` and ```voltsDrive```. ```joyDrive``` takes direct input from the joystick (from 0 to 1 of the axis) and then ports that directly to the percentage of the motor's power to apply to the drivetrain. Volts drive is more specifically for other things we might have to manipulate the DriveTrain, such as a navX and RamseteCommand (read abt in Concepts).
+Refer to the comments for most of the information. We have a constructor that lets us put all the motors into a drive system. Then, we have methods that will enable us to manipulate those motors. The idea of the subsystem is that any four motors would work. Subsystems are meant to be manipulated. We have two manipulation methods, ```joyDrive``` and ```voltsDrive```. ```joyDrive``` takes direct input from the joystick (from 0 to 1 of the axis) and then ports that directly to the percentage of the motor's power to apply to the drivetrain. Volts drive is used by commands/code that need to be very precise with the robot's movements.
 ___
 ### Drive Command (Encoder Drive)
 ```java
