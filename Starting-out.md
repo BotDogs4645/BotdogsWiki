@@ -31,7 +31,7 @@ ___
 * **Main**    
     This is where the Robot starts. We usually don't touch it at all.
 * **Robot**    
-     Some fundamental, crucial pieces of the robot are stored here. Like an Arduino or Argon, a forever while loop constantly runs on the robot's hardware. This while loop always calls on these functions in Robot every 20 ms. They all have self-explanatory names such as ```RobotInit``` (runs only once, at the initialization of the robot) or ```RobotPeriodic``` (always runs at the 20 ms time frame). A minor fraction of our code will be written here, so it's probably best not to mess with it unless you know what you're doing.
+     Some fundamental, crucial pieces of the robot are stored here. Like an Arduino or Argon, a forever while loop constantly runs on the robot's hardware. This while loop always calls on these functions in Robot every 20 ms. They all have self-explanatory names such as ```RobotInit``` (runs only once, at the initialization of the robot) or ```RobotPeriodic``` (is called every 20ms). A minor fraction of our code will be written here, so it's probably best not to mess with it unless you know what you're doing.
 * **RobotContainer**    
     The file that holds most of our declarations of objects and subsystems. It can contain a part declaration, subsystem declaration, command setup, and command binding to controllers. Method names inside are pretty self-explanatory.     
 * **Subsystems**    
