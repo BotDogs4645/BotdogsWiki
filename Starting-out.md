@@ -23,6 +23,7 @@ ___
 6. Choose a project name (it can be named anything)
 7. Type in our team number, 4645. 
 8. Create a project.
+> For Romi Robots, a template can be created by swapping "Command Robot" for "Romi - Command Robot" 
 ___
 #### Parts of a command robot
 * **Constants**    
