@@ -54,7 +54,7 @@ ___
 The roboRIO is this grey box on the robot. It contains our code that runs on the robot. It has a bunch of I/O, such as an I2C port, PWM, and analog. It is recommended that the roboRIO is handled by electronics, but programming should also be informed about it. CORE team members might be asked to flash the roboRIO or radios.    
 
 ##### roboRIO lights
-Programming is all about giving instructions and receiving a response. A basic form of that is in the form of the lights on the roboRIO.    
+Programming is all about giving instructions and receiving a response. A basic form of that are the lights on the roboRIO.    
 We look at DS for specific errors; however, if something much more fundamental goes wrong, consult the roboRIO lights.    
     
 Here are some to look out for:    
