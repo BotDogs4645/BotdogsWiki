@@ -335,11 +335,12 @@ This is an example of an encoder command. We use encoders to count the rotations
       > Returns shaft rotations.    
         $P_c =$ the pulse count of the encoder (returned by ```MotorObject.getSelectedSensorPosition()```)    
         $P_r =$ amount of pulses in a revolution (2048 in Falcon 500 motors)    
-        $R_s =$ shaft rotations.
+        $R_s =$ shaft rotations
    ### ${R_s \over G} = R_w$
       > Returns wheel rotations    
         $R_s =$ shaft rotations    
         $G =$ gearing
+        $R_w =$ wheel rotations
    ### $R_w * D_w * \pi = D_t$
       > Returns distance traveled in meters    
         $R_w =$ wheel rotations    
