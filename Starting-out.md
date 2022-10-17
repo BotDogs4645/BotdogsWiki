@@ -67,7 +67,7 @@ Here are some to look out for:
 * **Status**:
     The status light is special. It activates only while booting. If it stays on for too long (greater than a minute) or is blinking AT ALL:
     1. Leave it ON.
-    2. Tell a coach or lead immediately.
+    2. Tell a lead immediately.
 * **Comm**:
     * ${\color{grey}\text{Grey}}$: No Communications    
     There is a lot that could be wrong. Check cables, connections, and firmware on both the RIO and laptop.
