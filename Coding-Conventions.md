@@ -10,7 +10,7 @@ XboxController xCont = new XboxController(1); // declare a new Joystick on port 
 JoystickButton button = new JoystickButton(xCont, 1); // declare a new button on xCont on button port 1
 // do something with button
 ```
-This process seems relatively simple but becomes annoying when you want to change around the functions of a button. Relating which button port #'s are equal to its name is annoying (how do we know which port # is the A button?). There's also a lot of code that we have to write to declare every single button. This gets annoying and a space hog very quickly. The solution is a HashMap that uses the button name as an index string. Here is that decl:
+This process seems relatively simple but becomes annoying when you want to change around the functions of a button. Relating which button is which can get annoying (for example, how do we know which port # is the A button?). There's also a lot of code that we have to write to declare every single button. The solution is a HashMap that uses the button name as an index.
 ```java
 public HashMap<String, JoystickButton> xboxBinds = new HashMap<String, JoystickButton>();
 for (int i = 1; i < MISC.KEY_NAMES.length; i++) {
