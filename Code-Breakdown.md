@@ -244,12 +244,12 @@ public class DriveTrain extends SubsystemBase {
     tab.add("drivetrain", this); // Adds the drivetrain class into the shuffleboard tab.
   }
 
-  public void voltsDrive(double leftVs, double rightVs) { // Vs is a good abrev. for volts
-    left.setVoltage(leftVs); // Motors take a voltage, between 1-12 volts. We are just setting it's voltage directly. More volts = more power.
+  public void voltsDrive(double leftVs, double rightVs) { // Vs is a good abbreviation for volts
+    left.setVoltage(leftVs); // Motors take a voltage, between -12 and 12 volts. We are just setting its voltage directly. More volts = more power.
     right.setVoltage(rightVs);
 
     // when setting voltages, make sure to feed the safety system.
-    drive.feed(); // safety systems need a direct input into the DiffDrive class, so when we set left and right
+    drive.feed(); // safety systems need a direct input into the DifferentialDrive instance, so when we set left and right
     // individually, we need to feed the system.
   }
 
