@@ -95,17 +95,9 @@ public class RobotContainer {
     Logic should be used only in subsystems/commands
   */
   // current reference point: Battery = back of robot
-  
-  // DriveTrain motors  
-  // Our motors are Falcon 500s, which are controlled by integrated Talon controllers.
-  private WPI_TalonFX leftOne = new WPI_TalonFX(MOTOR_IO.LEFT_ONE);
-  private WPI_TalonFX leftTwo = new WPI_TalonFX(MOTOR_IO.LEFT_TWO);
-
-  private WPI_TalonFX rightOne = new WPI_TalonFX(MOTOR_IO.RIGHT_ONE);
-  private WPI_TalonFX rightTwo = new WPI_TalonFX(MOTOR_IO.RIGHT_TWO);
 
   // Our custom DriveTrain subclass, which is mentioned below.
-  private DriveTrain drive = new DriveTrain(leftOne, leftTwo, rightOne, rightTwo);
+  private DriveTrain drive = new DriveTrain();
 
   // Indexer
   private WPI_TalonFX indexTop = new WPI_TalonFX(INDEX_IO.TOP);
@@ -208,12 +200,8 @@ public class DriveTrain extends SubsystemBase {
   // We have all three types of chassis, but Differential is the easiest to explain.
   private DifferentialDrive drive;
   
-  public DriveTrain(WPI_TalonFX leftMotorOne, WPI_TalonFX leftMotorTwo, WPI_TalonFX rightMotorOne, WPI_TalonFX rightMotorTwo) {
-    // Take our motors and set them to our instance variables.
-    this.leftMotorOne = leftMotorOne;
-    this.leftMotorTwo = leftMotorTwo;
-    this.rightMotorOne = rightMotorOne;
-    this.rightMotorTwo = rightMotorTwo;
+  public DriveTrain() {
+    init();
     
     // Create our motor controller groups in-house.
     this.left = new MotorControllerGroup(this.leftMotorOne, this.leftMotorTwo);
@@ -235,6 +223,16 @@ public class DriveTrain extends SubsystemBase {
     // Motors can either spin clockwise or counterclockwise. Positive .set() values means it spins clockwise. Vice versa with negative.
     left.setInverted(false);
     right.setInverted(false);
+  }
+
+  public void init() {
+    // DriveTrain motors  
+    // Our motors are Falcon 500s, which are controlled by integrated Talon controllers.
+    private WPI_TalonFX leftOne = new WPI_TalonFX(MOTOR_IO.LEFT_ONE);
+    private WPI_TalonFX leftTwo = new WPI_TalonFX(MOTOR_IO.LEFT_TWO);
+
+    private WPI_TalonFX rightOne = new WPI_TalonFX(MOTOR_IO.RIGHT_ONE);
+    private WPI_TalonFX rightTwo = new WPI_TalonFX(MOTOR_IO.RIGHT_TWO);
   }
   
   // runs testing software to monitor and control specific aspects about the subsystems.
