@@ -72,22 +72,21 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj.DigitalInput;
 
 // Vendor imports
 import com.kauailabs.navx.frc.AHRS;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
-
 // in package imports
-import frc.robot.Constants.MOTOR_IO.DRIVE_IO;
-import frc.robot.Constants.MOTOR_IO.INDEX_IO;
 import frc.robot.commands.EncoderDrivePrelim;
 import frc.robot.commands.Index;
+import frc.robot.commands.Shoot;
 import frc.robot.Constants.MISC;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Indexer;
+
 
 public class RobotContainer {
   /* 
@@ -95,23 +94,21 @@ public class RobotContainer {
     Logic should be used only in subsystems/commands
   */
   // current reference point: Battery = back of robot
-
-  // Our custom DriveTrain subclass, which is mentioned below.
+  
+  // DriveTrain
   private DriveTrain drive = new DriveTrain();
 
   // Indexer
-  private WPI_TalonFX indexTop = new WPI_TalonFX(INDEX_IO.TOP);
-  private WPI_TalonFX indexBottom = new WPI_TalonFX(INDEX_IO.BOTTOM);
-  private DigitalInput beam = new DigitalInput(4); // DIO 4 on roboRIO
+  Indexer index = new Indexer();
+  WPI_TalonFX shootie = new WPI_TalonFX(13);
+  WPI_TalonFX loadie = new WPI_TalonFX(12);
 
-  private Indexer index = new Indexer(indexTop, indexBottom, beam);
-
-  // Joystick & navX (is static so it can be referenced anywhere)
-  public static final Joystick joystick = new Joystick(0); // identify your peripheral ids on DS
+  // Joystick (is static so it can be ref anywhere)
+  public static final Joystick joystick = new Joystick(0);
   public static final XboxController xbox = new XboxController(1);
-  public static final AHRS navX = new AHRS(); // navX is a gyroscope. It gives us direction.
-  // Why not put these in constants? Well, we want to declare it AFTER the robot has started.
-  // Constants are established immediately, which is not ideal.
+
+  // AHRS (navx), static for ref anywhere
+  public static final AHRS navX = new AHRS();
 
   // init of JoystickButton hashmap. Usage in the @RobotContainer method
   public HashMap<String, JoystickButton> xboxBinds = new HashMap<String, JoystickButton>();
