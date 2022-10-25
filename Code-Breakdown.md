@@ -353,6 +353,10 @@ This is an example of an encoder command. We use encoders to count the rotations
 ___
 ### Indexer Subsystem
 ```java
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
 package frc.robot.subsystems;
 
 // java base imports
@@ -365,11 +369,13 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 
 // Vendor imports
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 
 // In package imports
 import frc.robot.Constants.*;
+import frc.robot.Constants.MOTOR_IO.INDEX_IO;
 
 public class Indexer extends SubsystemBase {
   /** Creates a new Indexer. */
@@ -377,37 +383,33 @@ public class Indexer extends SubsystemBase {
   public boolean testing = true;
 
   private WPI_TalonFX top;
-  private WPI_TalonFX bottom;
+  private WPI_TalonSRX bottom;
+  private WPI_TalonSRX intakeWheels;
+  private WPI_TalonSRX drawbridgeMotor;
 
   private DigitalInput beam;
 
-  public Indexer(WPI_TalonFX top, WPI_TalonFX bottom, DigitalInput beam) {
-    this.top = top;
-    this.bottom = bottom;
-    this.beam = beam;
-    
+  public Indexer() {
+    initialize();
+
     config();
+    
     if (testing) {
       enableTesting();
     }
   }
 
-  public void config() {
-    // neutral mode essentially means what it does at 0% rpm.
-    // does it keep going or is it gonna brake?
-    // we want it to brake.
-    top.setNeutralMode(NeutralMode.Brake);
-    bottom.setNeutralMode(NeutralMode.Brake);
+  public void initialize() {
+    top = new WPI_TalonFX(INDEX_IO.TOP);
+    bottom = new WPI_TalonSRX(INDEX_IO.BOTTOM);
+    intakeWheels = new WPI_TalonSRX(INDEX_IO.INTAKE_WHEELS);
+    drawbridgeMotor = new WPI_TalonSRX(INDEX_IO.DRAWBRIDGE);
+    beam = new DigitalInput(1); // DIO 4 on roboRIO
   }
 
-  public void enableTesting() {
-    // here is a bunch of shuffleboard code,
-    // this is essentially how you view variables in real time.
-    // that "() -> method call" is just a "variable supplier". it returns a value and is sent to shuffleboard
-    ShuffleboardTab indexerTab = Shuffleboard.getTab("Indexer");
-    indexerTab.addString("Top Belt Speed", () -> getBottomBeltSpeed() * 100 + "%");
-    indexerTab.addString("Bottom Belt Speed", () -> getTopBeltSpeed() * 100 + "%");
-    indexerTab.addBoolean("Beam Trip", () -> isTripped());
+  public void config() {
+    top.setNeutralMode(NeutralMode.Brake);
+    bottom.setNeutralMode(NeutralMode.Brake);
   }
 
   public void setBottomBeltSpeed(double percent) {
@@ -418,22 +420,38 @@ public class Indexer extends SubsystemBase {
     top.setVoltage(INDEXER_CONSTANTS.MAX_VOLTS * percent);
   }
 
+  public void setIntakeWheelSpeed(double percent) {
+    intakeWheels.setVoltage(INDEXER_CONSTANTS.MAX_VOLTS * percent);
+  }
+
+  public void setDrawbridgeSpeed(double percent) {
+    drawbridgeMotor.setVoltage(INDEXER_CONSTANTS.MAX_VOLTS * percent);
+  }
+
   public double getBottomBeltSpeed() {
-    // get returns speed from -100% to 100% of it's maximum speed.
-    return bottom.get(); // get the bottom belt speed in indices [-1, 1]
+    return bottom.get();
   }
 
   public double getTopBeltSpeed() {
-    return top.get(); // get the top belt speed in indices [-1, 1]
+    return top.get();
   }
 
   public boolean isTripped() {
-    return beam.get(); // if the beam is tripped, return true.
+    return beam.get();
   }
 
   public void idle() {
     setTopBeltSpeed(0);
     setBottomBeltSpeed(0);
+    setIntakeWheelSpeed(0);
+    setDrawbridgeSpeed(0);
+  }
+
+  public void enableTesting() {
+    ShuffleboardTab indexerTab = Shuffleboard.getTab("Indexer");
+    indexerTab.addString("Top Belt Speed", () -> getBottomBeltSpeed() * 100 + "%");
+    indexerTab.addString("Bottom Belt Speed", () -> getTopBeltSpeed() * 100 + "%");
+    indexerTab.addBoolean("Beam Trip", () -> isTripped());
   }
 
   @Override
