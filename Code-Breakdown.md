@@ -164,99 +164,106 @@ ___
 ```java
 package frc.robot.subsystems;
 
-// java base imports
+// Java base imports
 
-// WPILib imports
+//WPILib imports
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 // Vendor imports
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
-// In package imports
+// in package imports
+import frc.robot.subsystems.DriveTrain;
+
 import frc.robot.Constants.DRIVE_CONSTANTS;
+import frc.robot.Constants.MOTOR_IO.DRIVE_IO;
 
 public class DriveTrain extends SubsystemBase {
   /** Creates a new DriveTrain. */
+
+  public boolean testing = true;
   
-  // allows us to have a "testing mode" whenever we want.
-  // Avoid having it all on all the time because the analysis can cause slowness and clutters up Shuffleboard.
-  public boolean testing = false;
-  
-  // Motor instances variables. We are using Falcons, which use integrated Talon controllers.
   private WPI_TalonFX leftMotorOne;
   private WPI_TalonFX leftMotorTwo;
   private WPI_TalonFX rightMotorOne;
   private WPI_TalonFX rightMotorTwo;
   
-  // MotorControllerGroups essentially group together motors. This makes them follow each other.
-  // Left motor group and right motor group (with ref as battery)
   private MotorControllerGroup left;
   private MotorControllerGroup right;
   
-  // A differential drive is basically a motor group on one side and a motor group on the other side. 
-  // There are three types: Differential, Mecanum, and Swerve.
-  // We have all three types of chassis, but Differential is the easiest to explain.
   private DifferentialDrive drive;
   
   public DriveTrain() {
-    init();
-    
-    // Create our motor controller groups in-house.
-    this.left = new MotorControllerGroup(this.leftMotorOne, this.leftMotorTwo);
-    this.right = new MotorControllerGroup(this.rightMotorOne, this.rightMotorTwo);
-    
-    // create our drive in-house.
-    this.drive = new DifferentialDrive(left, right);
-    
-    // Configure all parts of the subsystem into modes and settings we need./
+    initialize();
+
     config();
+
     // if we are testing, enable testing mode.
     if (testing) {
       enableTesting();
     }
     
   }
+
+  public void initialize() {
+    leftMotorOne = new WPI_TalonFX(DRIVE_IO.LEFT_ONE);
+    leftMotorTwo = new WPI_TalonFX(DRIVE_IO.LEFT_TWO);
   
-  public void config() {
-    // Motors can either spin clockwise or counterclockwise. Positive .set() values means it spins clockwise. Vice versa with negative.
-    left.setInverted(false);
-    right.setInverted(false);
+    rightMotorOne = new WPI_TalonFX(DRIVE_IO.RIGHT_ONE);
+    rightMotorTwo = new WPI_TalonFX(DRIVE_IO.RIGHT_TWO);
+
+    this.left = new MotorControllerGroup(leftMotorOne, leftMotorTwo);
+    this.right = new MotorControllerGroup(rightMotorOne, rightMotorTwo);
+    
+    this.drive = new DifferentialDrive(left, right);
   }
-
-  public void init() {
-    // DriveTrain motors  
-    // Our motors are Falcon 500s, which are controlled by integrated Talon controllers.
-    private WPI_TalonFX leftOne = new WPI_TalonFX(MOTOR_IO.LEFT_ONE);
-    private WPI_TalonFX leftTwo = new WPI_TalonFX(MOTOR_IO.LEFT_TWO);
-
-    private WPI_TalonFX rightOne = new WPI_TalonFX(MOTOR_IO.RIGHT_ONE);
-    private WPI_TalonFX rightTwo = new WPI_TalonFX(MOTOR_IO.RIGHT_TWO);
+  
+  // we should start doing this with our classes, just so we can easily change configs without the mess in the decl.
+  public void config() {
+    left.setInverted(false);
+    right.setInverted(true);
+    rightMotorTwo.setSelectedSensorPosition(0);
+    leftMotorTwo.setSelectedSensorPosition(0);
   }
   
   // runs testing software to monitor and control specific aspects about the subsystems.
   public void enableTesting() {
-    ShuffleboardTab tab = Shuffleboard.getTab("Drivetrain"); // gets the "Drivetrain" tab on Shuffleboard
-    ShuffleboardTab tabMain = Shuffleboard.getTab("MAIN");
-    tab.add("drivetrain", this); // Adds the drivetrain class into the shuffleboard tab.
+    ShuffleboardTab tab = Shuffleboard.getTab("Drivetrain");
+    tab.add("drivetrain", this);
+    tab.addNumber("left encoder", () -> getEncoderLeft());
+    tab.addNumber("right encoder", () -> getEncoderRight());
   }
 
-  public void voltsDrive(double leftVs, double rightVs) { // Vs is a good abbreviation for volts
-    left.setVoltage(leftVs); // Motors take a voltage, between -12 and 12 volts. We are just setting its voltage directly. More volts = more power.
+  public void voltsDrive(double leftVs, double rightVs) {
+    left.setVoltage(leftVs);
     right.setVoltage(rightVs);
-
     // when setting voltages, make sure to feed the safety system.
-    drive.feed(); // safety systems need a direct input into the DifferentialDrive instance, so when we set left and right
-    // individually, we need to feed the system.
+    drive.feed();
   }
 
   public void joyDrive(double Y, double Z) {
-    drive.arcadeDrive(Y * DRIVE_CONSTANTS.MAX_COEFF, Z * DRIVE_CONSTANTS.MAX_COEFF); 
-    // arcadeDrive means the joystick rotation is the rotation of the robot and front & back movement of the stick
-    // controls forward and back motion of the robot. This method directly relates joystick to movement.
+    // add slope later?
+    drive.arcadeDrive(Y * DRIVE_CONSTANTS.MAX_COEFF, Z * DRIVE_CONSTANTS.MAX_COEFF);
   }
 
+  public double getEncoderLeft() {
+    // returns in meters
+    // pos / encoder ticks = shaft rotations
+    // shaft rotations * gearing = wheel rotations
+    // wheel rotations * circumference = meters traveled
+    double wheelRotations = (leftMotorTwo.getSelectedSensorPosition() / DRIVE_CONSTANTS.ENCODER_TICKS) * DRIVE_CONSTANTS.GEAR_RATIO;
+    return wheelRotations * DRIVE_CONSTANTS.WHEEL_CIRCUMFRENCE;
+  }
+
+  public double getEncoderRight() {
+    double wheelRotations = (rightMotorTwo.getSelectedSensorPosition() / DRIVE_CONSTANTS.ENCODER_TICKS) * DRIVE_CONSTANTS.GEAR_RATIO;
+    return wheelRotations * DRIVE_CONSTANTS.WHEEL_CIRCUMFRENCE;
+  }
+  
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
