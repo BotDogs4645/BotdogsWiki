@@ -28,7 +28,7 @@
 [bffs]: https://github.com/Aidan747/FRC-Offseason-2022/wiki/Tools
 [cams]: https://github.com/Aidan747/FRC-Offseason-2022/wiki/CameraNetworkTables
 [pidtuner]: https://github.com/Aidan747/FRC-Offseason-2022/wiki/PIDTuner
-[jetio]: x
+[jetio]: https://github.com/Aidan747/FRC-Offseason-2022/wiki/Jetson-IO
 [wirePrin]: x
 [frcsys]: frcsys
 [senstype]: x
