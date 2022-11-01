@@ -11,6 +11,7 @@
 ## Programming Advanced
 - [ ] [**CameraNetworkTables**][cams]
 - [ ] [**Jetson I/O**][jetio]
+- [ ] [**PIDTuner**][pidtuner]
 
 ## Electronics
 - [ ] [**Wiring Principles**]
@@ -26,6 +27,7 @@
 [dvcupd]: https://github.com/Aidan747/FRC-Offseason-2022/wiki/Updating-devices
 [bffs]: https://github.com/Aidan747/FRC-Offseason-2022/wiki/Tools
 [cams]: https://github.com/Aidan747/FRC-Offseason-2022/wiki/CameraNetworkTables
+[pidtuner]: https://github.com/Aidan747/FRC-Offseason-2022/wiki/PIDTuner
 [jetio]: x
 [wirePrin]: x
 [frcsys]: frcsys
