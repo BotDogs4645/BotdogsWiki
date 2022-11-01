@@ -9,7 +9,7 @@
 - [x] [**GitHub**][GConv]    
 
 ## Programming Advanced
-- [] [**CameraNetworkTables**][cams]
+- [ ] [**CameraNetworkTables**][cams]
 
 ## Electronics
 - [ ] [**Wiring Principles**][]
