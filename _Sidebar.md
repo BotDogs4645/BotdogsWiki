@@ -10,11 +10,12 @@
 
 ## Programming Advanced
 - [ ] [**CameraNetworkTables**][cams]
+- [ ] [**Jetson I/O**][jetio]
 
 ## Electronics
-- [ ] [**Wiring Principles**][]
-- [ ] [**FRC Control Systems**][]
-- [ ] [**Types of Sensors**][]
+- [ ] [**Wiring Principles**]
+- [ ] [**FRC Control Systems**]
+- [ ] [**Types of Sensors**]
 
 
 [home]: https://github.com/Aidan747/FRC-Offseason-2022/wiki
@@ -25,6 +26,7 @@
 [dvcupd]: https://github.com/Aidan747/FRC-Offseason-2022/wiki/Updating-devices
 [bffs]: https://github.com/Aidan747/FRC-Offseason-2022/wiki/Tools
 [cams]: https://github.com/Aidan747/FRC-Offseason-2022/wiki/CameraNetworkTables
+[jetio]: x
 [wirePrin]: x
 [frcsys]: frcsys
 [senstype]: x
