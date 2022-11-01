@@ -24,8 +24,8 @@ xboxBinds.get("A").whenPressed(commandOne)
 // Now this command runs when the button is pressed.
 ```
 
-### 
-
+### Other Practical Conventions
+For other very important practical conventions, check the Advanced Programming tab, which contains a lot of the software that comes standard with the 4645's projects.
 
 ___
 ## Code Styling Conventions
