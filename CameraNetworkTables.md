@@ -1,5 +1,5 @@
 ## CameraNetworkTables
-CameraNetworkTables are our communicator between roboRIO, laptop and the Jetson. The Jetson is, for the CameraNetworkTable's intents, an image processing system. It is integrated onto the robot. CameraNetworkTables allow us to be able to find, declare and control IP Cameras connected to the Jetson via networktable. There are a few settings you are able to change with CameraNetworkTables.
+CameraNetworkTables are our communicator between roboRIO, laptop and the Jetson-attached camera. The Jetson is, for the CameraNetworkTable's intents, an image processing system. It is integrated onto the robot. CameraNetworkTables allow us to be able to find, declare and control IP Cameras connected to the Jetson via networktable. There are a few settings you are able to change with CameraNetworkTables.
 ___
 #### Example
 Here's an example of a Shuffleboard layout containing some sliders, viewable settings and some request buttons.    
