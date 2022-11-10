@@ -18,4 +18,7 @@ ___
 Now, you'll want to build and push code to the robot so you can control your motor. That should automatically activate Shuffleboard, but if it doesn't you can manually open it by accessing the windows start menu and typing Shuffleboard. As you open that, you should see a new tab at the top which has the name of what you gave it in code. Click on the tab. All of your tools should be in order.
 
 ___
-#### What does it look like?
+#### What does it look like?    
+This is the automatic preset for the PID Tuner. Each section is labeled. For P, D, and F values they are on the left because they are most used. You can tune these values by directly entering them into the Direct box. Alternatively, you can move the sliders for each individual value so you can find a value faster that works, and then tune more specifically with the direct. The RPM settings to the bottom-middle gives you the same options to control via slider and a direct input for more precise inputs and value-readings. The graphs show both the velocity and the current error in RPM. In the top right is the special benchmark mode which sets velocity to 0 and then uses your PID values to measure how fast it reaches a setpoint. You can use this to see how good your PID values (trust me they can get pretty fast, anything within 0.75-1.5 seconds is too long. Bottom right is kI, but you're not going to edit those very much if I am being honest.      
+
+![image](https://user-images.githubusercontent.com/93739747/201108065-05c1b8ce-59a8-43f9-a378-ff8bde9b82d7.png)    
