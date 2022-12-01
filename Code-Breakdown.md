@@ -100,8 +100,6 @@ public class RobotContainer {
 
   // Indexer
   Indexer index = new Indexer();
-  WPI_TalonFX shootie = new WPI_TalonFX(13);
-  WPI_TalonFX loadie = new WPI_TalonFX(12);
 
   // Joystick (is static so it can be ref anywhere)
   public static final Joystick joystick = new Joystick(0);
