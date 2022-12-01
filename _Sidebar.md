@@ -3,7 +3,7 @@
 ## Programming 
 - [x] [**Getting started**][Gstart]  
 - [x] [**Coding Conventions**][CConv]    
-- [] [**DriveTrain**][drivet]
+- [ ] [**DriveTrain**][drivet]
 - [x] [**In-depth Code Breakdown**][bdown]  
 - [x] [**Tools**][bffs]   
 - [x] [**Updating Devices**][dvcupd]    
