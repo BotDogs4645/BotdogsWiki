@@ -434,3 +434,175 @@ public class DriveTrain extends SubsystemBase {
 ```
 Okay. All of that is what we call "boilerplate"; there is no logic present and is just filler so we can control the subsystem. Now, we have to add methods to actually control the motors. For it to work, we need to somehow get Joystick input to the DifferentialDrive. First, we need to add a method that uses a built-in DifferentialDrive method to control the MotorControllerGroups.
 ```java
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
+package frc.robot.subsystems;
+
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+
+import frc.robot.Constants.IO.DRIVE_IO;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+public class DriveTrain extends SubsystemBase {
+  final boolean is_testing = true;
+
+  WPI_TalonFX leftMotorOne;
+  WPI_TalonFX leftMotorTwo;
+  WPI_TalonFX rightMotorOne;
+  WPI_TalonFX rightMotorTwo;
+
+  MotorControllerGroup left;
+  MotorControllerGroup right;
+
+  DifferentialDrive drive;
+
+  /** Creates a new DriveTrain. */
+  public DriveTrain() {
+    initialize();
+
+    config();
+
+    if (is_testing) {
+      enableTesting();
+    }
+  }
+
+  public void initialize() {
+    leftMotorOne = new WPI_TalonFX(DRIVE_IO.LEFT_ONE);
+    leftMotorTwo = new WPI_TalonFX(DRIVE_IO.LEFT_TWO);
+
+    rightMotorOne = new WPI_TalonFX(DRIVE_IO.RIGHT_ONE);
+    rightMotorTwo = new WPI_TalonFX(DRIVE_IO.RIGHT_TWO);
+
+    left = new MotorControllerGroup(leftMotorOne, leftMotorTwo);
+    right = new MotorControllerGroup(rightMotorOne, rightMotorTwo);
+
+    drive = new DifferentialDrive(left, right);
+  }
+  
+  public void config() {}
+  
+  public void enableTesting() {}
+
+  public void joystickInput(double y_value, double twist_value) {
+    drive.arcadeDrive(y_value, twist_value);
+  }
+
+  @Override
+  public void periodic() {
+    // This method will be called once per scheduler run
+  }
+}
+```
+You will notice about this code that we "port" (move) our joystick values -> a method named arcadeDrive(). The method arcadeDrive() takes two arguments: a front and back motion value and a rotation value. The "y_value" part is basically going to be a number between 1 and -1. If it is one, then the robot will move forward at 100% speed. The "twist_value" part is also a number between 1 and -1 and determines how fast you rotate left or right. The actual names of the arguments refer to which part of the joystick is being used; the y_value is technically the forward and back motion of the Joystick. Our joysticks have a twist which is perfect for rotation, therefore we have the names y_value and twist_value.    
+Now, we have to add some way to actually get those Joystick values. We will create a new command (usually we do not use commands to port joystick inputs and just use a perpetual InstantCommand, but for example sake) that takes in a Joystick and our DriveTrain as inputs.    
+```java
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
+package frc.robot.commands;
+
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.DriveTrain;
+
+public class Drive extends CommandBase {
+  Joystick joy;
+  DriveTrain drive;
+
+  /** Creates a new Drive. */
+  public Drive(Joystick joy, DriveTrain drive) {
+    this.joy = joy;
+    this.drive = drive;
+
+    addRequirements(drive);    
+  }
+
+  // Called when the command is initially scheduled.
+  @Override
+  public void initialize() {}
+
+  // Called every time the scheduler runs while the command is scheduled.
+  // The Joystick class comes with methods to get the Y value and to get the Twist value. Therefore,
+  // we are just going to get those values and constantly execute this method to 
+  // get those values into the DriveTrain.
+  @Override
+  public void execute() {
+    drive.joystickInput(joy.getY(), joy.getTwist());
+  }
+
+  // Called once the command ends or is interrupted.
+  @Override
+  public void end(boolean interrupted) {}
+
+  // Returns true when the command should end.
+  @Override
+  public boolean isFinished() {
+    return false;
+  }
+}
+```
+We are almost done now. Our final step is connecting the Command we have created to the Subsystem we have created. To do that, we want to connect our command as the DriveTrain's "default command" meaning it will always run as long as no other commands are running that require the DriveTrain subsystem. To do that, we are going to edit RobotContainer to initialize our DriveTrain, a joystick (to determine your Joystick port number, open up Driver Station and see which device is green. Whatever number it is, put it where I put 0 for the Joystick.) and then set a new Drive command to be the default command of the DriveTrain subsystem.    
+
+```java
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
+package frc.robot;
+
+import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import frc.robot.commands.Drive;
+import frc.robot.subsystems.DriveTrain;
+
+/**
+ * This class is where the bulk of the robot should be declared. Since Command-based is a
+ * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
+ * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
+ * subsystems, commands, and button mappings) should be declared here.
+ */
+public class RobotContainer {
+  // The robot's subsystems and commands are defined here... 
+  public final Joystick joy = new Joystick(0);
+
+  private final DriveTrain drive = new DriveTrain();
+
+  /** The container for the robot. Contains subsystems, OI devices, and commands. */
+  public RobotContainer() {
+    // Configure the button bindings
+    configureButtonBindings();
+    drive.setDefaultCommand(new Drive(joy, drive));
+  }
+
+  /**
+   * Use this method to define your button->command mappings. Buttons can be created by
+   * instantiating a {@link GenericHID} or one of its subclasses ({@link
+   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
+   * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
+   */
+  private void configureButtonBindings() {}
+
+  /**
+   * Use this to pass the autonomous command to the main {@link Robot} class.
+   *
+   * @return the command to run in autonomous
+   */
+  public Command getAutonomousCommand() {
+    // because we removed m_autoCommand when we deleted it, this is going to error.
+    // Instead, we can replace it with an empty InstantCommand.
+    // InstantCommands are commands that run one method once. Therefore,
+    // an empty InstantCommand will not run any code. This is just a placeholder
+    // for when we want to add an actual auto command.
+    return new InstantCommand();
+  }
+}
+```
