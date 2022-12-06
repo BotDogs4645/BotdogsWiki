@@ -2,7 +2,7 @@
 - [x] [**Home**][home]  
 ## Programming 
 - [x] [**Getting started**][Gstart]  
-- [ ] [**DriveTrain**][drivet]
+- [x] [**DriveTrain**][drivet]
 - [x] [**Coding Conventions**][CConv]    
 - [x] [**In-depth Code Breakdown**][bdown]  
 - [x] [**Tools**][bffs]   
