@@ -8,7 +8,7 @@ Make sure you have 2022 of WPILib and create a new command-based project. When y
 
 <img align="right" width="200" height="200" src="https://user-images.githubusercontent.com/93739747/205117736-2efb6ee1-4f2c-4c4d-ab53-dbc1ccddd58d.png">
 
-There are some unneeded things in this file tree. First of all, ```ExampleCommand.java``` and ```ExampleSubsystem.java``` will not be used. However, first, we need to remove all references to those files so we remain errorless in the files we do want to keep. To do that, lets first move to RobotContainer. Hopefully we know that all Subsystems and controllers are decared in RobotContainer. It is where we set up all our commands too. When we first start this project, the only references to ```ExampleCommand.java``` and ```ExampleSubsystem.java``` will be in RobotContainer. This is RobotContainer before we remove unneeded lines of code:    
+There are some unneeded things in this file tree. First of all, ```ExampleCommand.java``` and ```ExampleSubsystem.java``` will not be used. However, first, we need to remove all references to those files so we remain errorless in the files we do want to keep. To do that, let's first move to RobotContainer. Hopefully we know that all Subsystems and controllers are declared in RobotContainer. It is where we set up all our commands too. When we first start this project, the only references to ```ExampleCommand.java``` and ```ExampleSubsystem.java``` will be in RobotContainer. This is RobotContainer before we remove unneeded lines of code:    
 ```java
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
