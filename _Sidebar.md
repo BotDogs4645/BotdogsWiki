@@ -12,7 +12,7 @@
 ## Programming Advanced
 - [ ] [**CameraNetworkTables**][cams]
 - [ ] [**Jetson I/O**][jetio]
-- [ ] [**PIDTuner**][pidtuner]
+- [x] [**PIDTuner**][pidtuner]
 
 ## Electronics
 - [ ] [**Wiring Principles**]
